@@ -1,5 +1,5 @@
 import React from "react";
-import {useAppSelector, useAppDispatch} from "../../hooks";
+import {useAppSelector, useAppDispatch} from "../../hooks/hooks";
 import {changeFlag} from "../../redux/slices/home";
 
 const Home: React.FC = () => {
