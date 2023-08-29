@@ -1,9 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+export interface homeType {
+    flag: string
+}
+
 //Начальное значение
 const initialState = {
     flag: 'home'
-}
+} as homeType
 
 const homeSlice = createSlice({
     name: 'home',
