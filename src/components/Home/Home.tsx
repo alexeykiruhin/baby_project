@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './Home.module.css';
-import Preloader from "../common/Preloader/Preloader";
+// import Preloader from "../common/Preloader/Preloader";
+// import LoginContainer from "../Login/LoginContainer";
+import RegContainer from "../Reg/RegContainer";
 
 const Home: React.FC = () => {
 
@@ -11,7 +13,10 @@ const Home: React.FC = () => {
                     {/*<div className={!props.isSubsPosts ? 'active' : ''} onClick={props.togglePostsType}>Все посты</div>*/}
                     {/*<div className={props.isSubsPosts ? 'active' : ''} onClick={props.togglePostsType}>Подписки</div>*/}
                 </div>
-                <Preloader />
+                {/*<Preloader />*/}
+                {/*<LoginContainer />*/}
+                <RegContainer/>
+
                 {/*{(props.isFetching ?*/}
                 {/*    <Preloader /> :*/}
                 {/*    // (props.posts.map((post, index) => <PostContainer key={`post-${index}`} index={index} post={post} />))*/}
