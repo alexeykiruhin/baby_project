@@ -1,0 +1,13 @@
+.Create {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.createForm {
+    min-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

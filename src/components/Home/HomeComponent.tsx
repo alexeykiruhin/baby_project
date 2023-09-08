@@ -1,22 +1,35 @@
 import React from 'react';
 import styles from './Home.module.css';
 // import Preloader from "../common/Preloader/Preloader";
-// import LoginContainer from "../Login/LoginContainer";
-import RegContainer from "../Reg/RegContainer";
+// import LoginContainer from "../LoginComponent/LoginContainer";
+import RegContainer from '../Reg/RegContainer';
+import {Tabs} from 'antd';
+import type {TabsProps} from 'antd';
 
-const Home: React.FC = () => {
+const onChange = (key: string) => {
+    console.log(key);
+};
+
+const items: TabsProps['items'] = [
+    {
+        key: '1',
+        label: 'Все',
+        children: 'Content of Tab Pane 1',
+    },
+    {
+        key: '2',
+        label: 'Подписки',
+        children: <RegContainer/>,
+    },
+];
+
+const HomeComponent: React.FC = () => {
 
     return (
         <div className={styles.Home}>
-            <div className={styles.body} >
-                <div className={styles.wrapperDifferentPosts}>
-                    {/*<div className={!props.isSubsPosts ? 'active' : ''} onClick={props.togglePostsType}>Все посты</div>*/}
-                    {/*<div className={props.isSubsPosts ? 'active' : ''} onClick={props.togglePostsType}>Подписки</div>*/}
-                </div>
-                {/*<Preloader />*/}
-                {/*<LoginContainer />*/}
-                <RegContainer/>
-
+            <div className={styles.body}>
+                <Tabs className={styles.Tabs} defaultActiveKey="1" items={items} onChange={onChange} size={'large'}
+                      centered={true}/>
                 {/*{(props.isFetching ?*/}
                 {/*    <Preloader /> :*/}
                 {/*    // (props.posts.map((post, index) => <PostContainer key={`post-${index}`} index={index} post={post} />))*/}
@@ -30,4 +43,4 @@ const Home: React.FC = () => {
     )
 }
 
-export default Home
+export default HomeComponent;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from "./Login";
+import LoginComponent from "./LoginComponent";
 
 export type returnFinishLogin = {
     username: string,
@@ -13,7 +13,7 @@ const LoginContainer: React.FC = () => {
         console.log('Received values of form: ', values);
     };
 
-    return <Login onFinish={onFinish}/>
+    return <LoginComponent onFinish={onFinish}/>
 }
 
 export default LoginContainer;

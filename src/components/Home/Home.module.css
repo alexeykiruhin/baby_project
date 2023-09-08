@@ -51,6 +51,10 @@
     color: #3700b3;
 }
 
+.Tabs {
+    min-width: 600px;
+}
+
 @media screen and (max-width: 767px) {
     .pagination,
     .countPosts,

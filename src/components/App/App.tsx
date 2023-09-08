@@ -1,9 +1,12 @@
 import React from 'react';
-import Home from "../Home/Home";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import {Breadcrumb, Layout, theme} from 'antd';
-import HeaderContainer from "../Header/HeaderContainer";
-import FooterComponent from "../Footer/FooterComponent";
+import HomeComponent from '../Home/HomeComponent';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {Layout, theme} from 'antd';
+import HeaderContainer from '../Header/HeaderContainer';
+import FooterComponent from '../Footer/FooterComponent';
+import RatingComponent from '../Rating/RatingComponent';
+import CreateComponent from '../Create/CreateComponent';
+import UserInfoComponent from '../UserInfo/UserInfoComponent';
 
 export const {Content} = Layout;
 
@@ -16,11 +19,14 @@ const App: React.FC = () => {
         <Router>
             <Layout>
                 <HeaderContainer/>
-                <Content className="site-layout" style={{padding: '0 50px'}}>
-                    <Breadcrumb style={{margin: '16px 0'}} items={[{title: 'Home'}]}/>
+                <UserInfoComponent/>
+                <Content className="site-layout"
+                         style={{padding: '0 50px'}}>
                     <div style={{padding: 24, minHeight: 380, background: colorBgContainer}}>
                         <Routes>
-                            <Route path="/" element={<Home/>}/>
+                            <Route path="/" element={<HomeComponent/>}/>
+                            <Route path="/rating" element={<RatingComponent/>}/>
+                            <Route path="/create" element={<CreateComponent/>}/>
                             {/*// /!*<Route path="/login" element={<LoginContainer/>}/>*!/*/}
                             {/*// /!*<Route path="/register" element={<Reg/>}/>*!/*/}
                             {/*// /!*<Route path="/create" element={<CreatePostContainer/>}/>*!/*/}

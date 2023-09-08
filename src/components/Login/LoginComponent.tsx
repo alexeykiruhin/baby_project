@@ -7,7 +7,7 @@ import {returnFinishLogin} from "./LoginContainer";
 type Props = {
     onFinish: (values: returnFinishLogin) => void
 }
-const Login: React.FC<Props> = ({onFinish}) => {
+const LoginComponent: React.FC<Props> = ({onFinish}) => {
 
     return (
         <div className={styles.Login}>
@@ -54,4 +54,4 @@ const Login: React.FC<Props> = ({onFinish}) => {
     )
 }
 
-export default Login;
+export default LoginComponent;
