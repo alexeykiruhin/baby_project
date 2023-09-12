@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './Home.module.css';
-import RegContainer from '../Reg/RegContainer';
 import {Tabs} from 'antd';
 import type {TabsProps} from 'antd';
 import PostListComponent from '../PostList/PostListComponent';
+import SubPostListComponent from '../SubPostList/SubPostListComponent';
 
 const onChange = (key: string) => {
     console.log(key);
@@ -18,7 +18,7 @@ const items: TabsProps['items'] = [
     {
         key: '2',
         label: 'Подписки',
-        children: <RegContainer/>,
+        children: <SubPostListComponent/>,
     },
 ];
 

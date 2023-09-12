@@ -20,7 +20,20 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
     try {
         // const response: ApiResponse = await API.Home.getPosts(1,5);
         // return response;
+        console.log('all');
         return await API.Home.getPosts(1,5);
+    } catch (error) {
+        throw error;
+    }
+});
+
+//Получаем посты юзеров на кого подписан
+export const fetchSubPosts = createAsyncThunk('posts/fetchSubPosts', async () => {
+    try {
+        // const response: ApiResponse = await API.Home.getPosts(1,5);
+        // return response;
+        console.log('sub');
+        return await API.Home.getSubPosts(1,5);
     } catch (error) {
         throw error;
     }
@@ -32,6 +45,7 @@ const homeSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            // Обработка fetchPosts
             .addCase(fetchPosts.pending, (state) => {
                 state.status = 'loading';
             })
@@ -42,7 +56,19 @@ const homeSlice = createSlice({
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
-            });
+            })
+            //Обработка fetchSubPosts
+            .addCase(fetchSubPosts.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchSubPosts.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.posts = action.payload.posts;
+            })
+            .addCase(fetchSubPosts.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
     },
 });
 

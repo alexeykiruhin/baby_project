@@ -24,7 +24,8 @@ const CreateComponent: React.FC = () => {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
-                <TextArea rows={4} placeholder="maxLength is 6" maxLength={6}/>
+                <Input placeholder="Subject" maxLength={6}/>
+                <TextArea rows={4} placeholder="Description" maxLength={6}/>
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>

@@ -7,10 +7,14 @@ import FooterComponent from '../Footer/FooterComponent';
 import RatingComponent from '../Rating/RatingComponent';
 import CreateComponent from '../Create/CreateComponent';
 import UserInfoComponent from '../UserInfo/UserInfoComponent';
+import LoginContainer from '../Login/LoginContainer';
 
 export const {Content} = Layout;
 
 const App: React.FC = () => {
+
+
+    //Переменные для темы antd
     const {
         token: {colorBgContainer},
     } = theme.useToken();
@@ -27,7 +31,7 @@ const App: React.FC = () => {
                             <Route path="/" element={<HomeComponent/>}/>
                             <Route path="/rating" element={<RatingComponent/>}/>
                             <Route path="/create" element={<CreateComponent/>}/>
-                            {/*// /!*<Route path="/login" element={<LoginContainer/>}/>*!/*/}
+                            <Route path="/login" element={<LoginContainer/>}/>
                             {/*// /!*<Route path="/register" element={<Reg/>}/>*!/*/}
                             {/*// /!*<Route path="/create" element={<CreatePostContainer/>}/>*!/*/}
                             {/*// /!*<Route path="/users" element={<UsersContainer/>}/>*!/*/}

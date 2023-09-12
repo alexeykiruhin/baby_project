@@ -1,15 +1,15 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {fetchPosts} from '../../redux/slices/home';
+import {fetchSubPosts} from '../../redux/slices/home';
 import PostViewComponent from '../PostView/PostViewComponent';
 import {FloatButton, Space} from 'antd';
 
-const PostListComponent: React.FC = () => {
+const SubPostListComponent: React.FC = () => {
     const posts = useAppSelector(state => state.home.posts)
     const dispatch = useAppDispatch();
     useEffect(() => {
-        console.log('all')
-        dispatch(fetchPosts());
+        console.log('sub')
+        dispatch(fetchSubPosts());
     }, [dispatch])
     return (
         <Space direction="vertical" size="middle" style={{display: 'flex'}}>
@@ -19,4 +19,4 @@ const PostListComponent: React.FC = () => {
     )
 }
 
-export default PostListComponent;
+export default SubPostListComponent;

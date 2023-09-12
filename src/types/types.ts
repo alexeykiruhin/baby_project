@@ -25,3 +25,8 @@ export type PostProps = {
     index: number,
     post: PostType | null
 }
+
+export type LoginPass = {
+  username: string,
+  password: string
+}
