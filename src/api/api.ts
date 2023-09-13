@@ -37,7 +37,11 @@ instance.interceptors.response.use(
                     console.log(`ошибка - logoutThunk`);
                 });
                 console.log('set local');
-                // return instance.request(originalRequest);
+                console.log(originalRequest.url);
+                if (originalRequest.url !== 'login') {
+                    return instance.request(originalRequest);
+                }
+
             } catch (error) {
                 console.log('Ошибка авторизации', error);
                 // store.dispatch(setInfo(false, { id: null, img: null, username: '' })); // тут нужно затереть данные в auth
