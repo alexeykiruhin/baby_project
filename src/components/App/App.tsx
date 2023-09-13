@@ -1,13 +1,14 @@
 import React from 'react';
 import HomeComponent from '../Home/HomeComponent';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {Layout, theme} from 'antd';
+import {Layout} from 'antd';
 import HeaderContainer from '../Header/HeaderContainer';
 import FooterComponent from '../Footer/FooterComponent';
 import RatingComponent from '../Rating/RatingComponent';
 import CreateComponent from '../Create/CreateComponent';
 import UserInfoComponent from '../UserInfo/UserInfoComponent';
 import LoginContainer from '../Login/LoginContainer';
+import UserViewComponent from '../UserView/UserViewComponent';
 
 export const {Content} = Layout;
 
@@ -15,9 +16,9 @@ const App: React.FC = () => {
 
 
     //Переменные для темы antd
-    const {
-        token: {colorBgContainer},
-    } = theme.useToken();
+    // const {
+    //     token: {colorBgContainer},
+    // } = theme.useToken();
 
     return (
         <Router>
@@ -26,7 +27,8 @@ const App: React.FC = () => {
                 <UserInfoComponent/>
                 <Content className="site-layout"
                          style={{padding: '0 50px'}}>
-                    <div style={{padding: 24, minHeight: 380, background: colorBgContainer}}>
+                    {/*<div style={{padding: 24, minHeight: 380}}>*/}
+                        {/*, background: colorBgContainer*/}
                         <Routes>
                             <Route path="/" element={<HomeComponent/>}/>
                             <Route path="/rating" element={<RatingComponent/>}/>
@@ -35,11 +37,11 @@ const App: React.FC = () => {
                             {/*// /!*<Route path="/register" element={<Reg/>}/>*!/*/}
                             {/*// /!*<Route path="/create" element={<CreatePostContainer/>}/>*!/*/}
                             {/*// /!*<Route path="/users" element={<UsersContainer/>}/>*!/*/}
-                            {/*// /!*<Route path="/user/:userId" element={<UserContainer/>}/>*!/*/}
+                            <Route path="/user/:userId" element={<UserViewComponent/>}/>
                             {/*// /!*<Route path="/post/:postId" element={<PostViewContainer/>}/>*!/*/}
                             {/*// /!*<Route path="/tag-search" element={<TagSearch/>}/>*!/*/}
                         </Routes>
-                    </div>
+                    {/*</div>*/}
                 </Content>
                 <FooterComponent/>
             </Layout>

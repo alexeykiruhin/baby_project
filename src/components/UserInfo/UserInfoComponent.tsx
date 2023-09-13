@@ -19,6 +19,7 @@ const UserInfoComponent: React.FC = () => {
 
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const img = useAppSelector(state => state.auth.img)
+    const id = useAppSelector(state => state.auth.id)
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(checkAuth());
@@ -30,13 +31,15 @@ const UserInfoComponent: React.FC = () => {
                 isAuth
                     ? <>
                         <Avatar src={img} size="large"></Avatar>
-                        <Button
-                            size="small"
-                            style={{margin: '0 16px', verticalAlign: 'middle'}}
-                            onClick={info}
-                        >
-                            Info
-                        </Button>
+                        <NavLink to={`/user/${id}`}>
+                            <Button
+                                size="small"
+                                style={{margin: '0 16px', verticalAlign: 'middle'}}
+                                onClick={info}
+                            >
+                                Info
+                            </Button>
+                        </NavLink>
                         <Button size="small" style={{verticalAlign: 'middle'}} onClick={exit}>
                             Logout
                         </Button>

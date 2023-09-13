@@ -16,6 +16,7 @@ const HeaderComponent: React.FC= () => {
                 display: 'flex',
                 alignItems: 'center',
             }}
+            color={'light'}
         >
             <div className={styles.Logo}>Logo</div>
             <MenuComponent/>
