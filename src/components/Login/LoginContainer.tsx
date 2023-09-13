@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import LoginComponent from "./LoginComponent";
 import {useAppDispatch} from '../../hooks/hooks';
 import {login} from '../../redux/slices/auth';
 import {LoginPass} from '../../types/types';
+import {Navigate} from 'react-router-dom';
 
 export type returnFinishLogin = {
     username: string,
@@ -11,6 +12,7 @@ export type returnFinishLogin = {
 }
 
 const LoginContainer: React.FC = () => {
+    const [redirect, setRedirect] = useState(false);
 
     const dispatch = useAppDispatch();
     const onFinish = (values: returnFinishLogin): void => {
@@ -20,9 +22,15 @@ const LoginContainer: React.FC = () => {
             password: values.password
         }
         dispatch(login(loginData))
+        setRedirect(true);
     };
 
-    return <LoginComponent onFinish={onFinish}/>
+    return (
+        <>
+            {redirect && <Navigate to="/" replace={true}/>}
+            <LoginComponent onFinish={onFinish}/>
+        </>
+    )
 }
 
 export default LoginContainer;

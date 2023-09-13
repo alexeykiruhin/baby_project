@@ -1,31 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Avatar, Button} from 'antd';
 import styles from './UserInfo.module.css';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {NavLink} from 'react-router-dom';
-import {checkAuth} from '../../redux/slices/auth';
+import {checkAuth, logout} from '../../redux/slices/auth';
 
-const UserList = ['U', 'Lucy', 'Tom', 'Edward'];
-const ColorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
-const GapList = [4, 3, 2, 1];
 
 const UserInfoComponent: React.FC = () => {
-    const [user, setUser] = useState(UserList[0]);
-    const [color, setColor] = useState(ColorList[0]);
-    const [gap, setGap] = useState(GapList[0]);
 
-    const changeUser = () => {
-        const index = UserList.indexOf(user);
-        setUser(index < UserList.length - 1 ? UserList[index + 1] : UserList[0]);
-        setColor(index < ColorList.length - 1 ? ColorList[index + 1] : ColorList[0]);
+    const info = () => {
+        console.log('Info')
     };
 
-    const changeGap = () => {
-        const index = GapList.indexOf(gap);
-        setGap(index < GapList.length - 1 ? GapList[index + 1] : GapList[0]);
+    const exit = () => {
+        console.log('Logout')
+        dispatch(logout());
     };
 
     const isAuth = useAppSelector(state => state.auth.isAuth)
+    const img = useAppSelector(state => state.auth.img)
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(checkAuth());
@@ -34,19 +27,18 @@ const UserInfoComponent: React.FC = () => {
     return (
         <div className={styles.UserInfo}>
             {
-                isAuth ? <>
-                        <Avatar style={{backgroundColor: color, verticalAlign: 'middle'}} size="large" gap={gap}>
-                            {user}
-                        </Avatar>
+                isAuth
+                    ? <>
+                        <Avatar src={img} size="large"></Avatar>
                         <Button
                             size="small"
                             style={{margin: '0 16px', verticalAlign: 'middle'}}
-                            onClick={changeUser}
+                            onClick={info}
                         >
-                            ChangeUser
+                            Info
                         </Button>
-                        <Button size="small" style={{verticalAlign: 'middle'}} onClick={changeGap}>
-                            changeGap
+                        <Button size="small" style={{verticalAlign: 'middle'}} onClick={exit}>
+                            Logout
                         </Button>
                     </>
                     : <NavLink to={'/login'}>

@@ -10,6 +10,9 @@ export interface authType {
     access_token: string,
     status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: any
+    minus: number
+    plus: number
+    subscribers: Array<number>
 }
 
 //Начальное значение
@@ -21,21 +24,10 @@ const initialState = {
     access_token: '',
     status: 'idle', // 'idle', 'loading', 'succeeded', 'failed'
     error: null,
+    minus: 0,
+    plus: 0,
+    subscribers: [],
 } as authType
-
-// "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NDUyNjkyOCwianRpIjoiMTEyZWU3M2YtMTYzMC00Zjg4LTlmN2YtOGY0YWZjOTYyZmRhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjk0NTI2OTI4LCJjc3JmIjoiYzE3MGY0NmMtMTUyMy00Zjc0LWIyYWYtODU1MjhlMTljNTJkIiwiZXhwIjoxNjk0NTI2OTMzfQ.oBgiH0rJykkND-2Wmg2CdUTDNfEBgpjLOxlOoOew_rM",
-//     "isAuth": true,
-//     "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NDUyNjkyOCwianRpIjoiYWRhYmQwYzUtYTVjMy00MDMxLWJiNGItMzQzMTcxMWIwMDg1IiwidHlwZSI6InJlZnJlc2giLCJzdWIiOjEsIm5iZiI6MTY5NDUyNjkyOCwiY3NyZiI6Ijk4MDJmN2QwLTUzNWEtNGUwZi1hODFlLTU1YWFkMDFiMTUwNSIsImV4cCI6MTY5NzExODkyOH0.LoeKm9WtSHdpGtmvf7xv1ehqK-qZChy-DJwN7l_Kk2M",
-//     "user_obj": {
-//         "id": 1,
-//         "img": "https://randomuser.me/api/portraits/women/69.jpg",
-//         "minus": 0,
-//         "plus": 0,
-//         "subscribers": [
-//             21
-//         ],
-//         "username": "Alice"
-//     }
 
 //Проверка аутентификации
 export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
@@ -60,13 +52,22 @@ export const login = createAsyncThunk('auth/login', async ({username, password}:
     }
 });
 
+//Логаут
+export const logout = createAsyncThunk('auth/logout', async () => {
+    try {
+        return await API.Auth.logout();
+    } catch (error) {
+        throw error;
+    }
+});
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        // Обработка fetchPosts
         builder
-            // Обработка fetchPosts
             .addCase(checkAuth.pending, (state) => {
                 state.status = 'loading';
             })
@@ -75,12 +76,18 @@ const authSlice = createSlice({
                 state.isAuth = action.payload.isAuth;
                 state.username = action.payload.user_obj.username;
                 state.img = action.payload.user_obj.img;
+                state.id = action.payload.user_obj.id;
+                state.minus = action.payload.user_obj.minus;
+                state.plus = action.payload.user_obj.plus;
+                state.subscribers = action.payload.user_obj.subscribers;
+                state.access_token = action.payload.access_token;
             })
             .addCase(checkAuth.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             })
-            // Обработка login
+        // Обработка login
+        builder
             .addCase(login.pending, (state) => {
                 state.status = 'loading';
             })
@@ -89,8 +96,35 @@ const authSlice = createSlice({
                 state.isAuth = action.payload.isAuth;
                 state.username = action.payload.user_obj.username;
                 state.img = action.payload.user_obj.img;
+                state.id = action.payload.user_obj.id;
+                state.minus = action.payload.user_obj.minus;
+                state.plus = action.payload.user_obj.plus;
+                state.subscribers = action.payload.user_obj.subscribers;
+                state.access_token = action.payload.access_token;
             })
             .addCase(login.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+        // Обработка logout
+        builder
+            .addCase(logout.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(logout.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // зануляем данные об аутентификации
+                state.isAuth = false;
+                state.username = '';
+                state.img = '';
+                state.id = '';
+                state.minus = 0
+                state.plus = 0
+                state.subscribers = []
+                state.access_token = '';
+                localStorage.removeItem('access_token');
+            })
+            .addCase(logout.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
             })

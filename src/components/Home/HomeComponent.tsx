@@ -4,10 +4,9 @@ import {Tabs} from 'antd';
 import type {TabsProps} from 'antd';
 import PostListComponent from '../PostList/PostListComponent';
 import SubPostListComponent from '../SubPostList/SubPostListComponent';
+import {useAppDispatch} from '../../hooks/hooks';
+import {fetchPosts, fetchSubPosts} from '../../redux/slices/home';
 
-const onChange = (key: string) => {
-    console.log(key);
-};
 
 const items: TabsProps['items'] = [
     {
@@ -23,6 +22,21 @@ const items: TabsProps['items'] = [
 ];
 
 const HomeComponent: React.FC = () => {
+    const dispatch = useAppDispatch();
+
+    const onChange = (key: string) => {
+        switch (key) {
+            case '1':
+                console.log(key);
+                dispatch(fetchPosts());
+                break;
+            case '2':
+                console.log(key);
+                dispatch(fetchSubPosts());
+                break;
+        }
+    }
+
     return (
         <div className={styles.Home}>
             <div className={styles.body}>

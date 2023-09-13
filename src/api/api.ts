@@ -79,6 +79,10 @@ export const API = {
             });
             return response.data;
         },
+        async logout() {
+            const response = await instance.get(`logout`);
+            return response.data;
+        },
     }
 
 }
