@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Space, Table, Tag} from 'antd';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
+import {fetchUsers} from '../../redux/slices/rating';
 
 const {Column} = Table;
 
@@ -35,36 +37,43 @@ const data: DataType[] = [
     },
 ];
 
-const RatingComponent: React.FC = () => (
-    <Table dataSource={data}>
-        <Column title="Name" dataIndex="name" key="name"/>
-        <Column title="Age" dataIndex="age" key="age"/>
-        <Column title="Address" dataIndex="address" key="address"/>
-        <Column
-            title="Tags"
-            dataIndex="tags"
-            key="tags"
-            render={(tags: string[]) => (
-                <>
-                    {tags.map((tag) => (
-                        <Tag color="blue" key={tag}>
-                            {tag}
-                        </Tag>
-                    ))}
-                </>
-            )}
-        />
-        <Column
-            title="Action"
-            key="action"
-            render={(_: any, record: DataType) => (
-                <Space size="middle">
-                    <a href='/'>Invite {record.name}</a>
-                    <a href='/'>Delete</a>
-                </Space>
-            )}
-        />
-    </Table>
-)
+const RatingComponent: React.FC = () => {
+    const users = useAppSelector(state => state.rating.users)
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(fetchUsers())
+    }, [dispatch])
+    return (
+        <Table dataSource={data}>
+            <Column title="Name" dataIndex="name" key="name"/>
+            <Column title="Age" dataIndex="age" key="age"/>
+            <Column title="Address" dataIndex="address" key="address"/>
+            <Column
+                title="Tags"
+                dataIndex="tags"
+                key="tags"
+                render={(tags: string[]) => (
+                    <>
+                        {tags.map((tag) => (
+                            <Tag color="blue" key={tag}>
+                                {tag}
+                            </Tag>
+                        ))}
+                    </>
+                )}
+            />
+            <Column
+                title="Action"
+                key="action"
+                render={(_: any, record: DataType) => (
+                    <Space size="middle">
+                        <a href="/">Invite {record.name}</a>
+                        <a href="/">Delete</a>
+                    </Space>
+                )}
+            />
+        </Table>
+    )
+}
 
 export default RatingComponent;

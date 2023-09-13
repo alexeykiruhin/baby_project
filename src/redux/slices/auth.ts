@@ -48,6 +48,7 @@ export const login = createAsyncThunk('auth/login', async ({username, password}:
         localStorage.setItem('access_token', access_token);
         return response;
     } catch (error) {
+        console.log('ОШИБКА')
         throw error;
     }
 });
@@ -105,6 +106,7 @@ const authSlice = createSlice({
             .addCase(login.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
+                console.log(action)
             })
         // Обработка logout
         builder

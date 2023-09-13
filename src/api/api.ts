@@ -37,7 +37,7 @@ instance.interceptors.response.use(
                     console.log(`ошибка - logoutThunk`);
                 });
                 console.log('set local');
-                return instance.request(originalRequest);
+                // return instance.request(originalRequest);
             } catch (error) {
                 console.log('Ошибка авторизации', error);
                 // store.dispatch(setInfo(false, { id: null, img: null, username: '' })); // тут нужно затереть данные в auth
@@ -83,6 +83,12 @@ export const API = {
             const response = await instance.get(`logout`);
             return response.data;
         },
+    },
+    Rating: {
+        async getUsers() {
+            const response = await instance.get(`users`);
+            return response.data;
+        }
     }
 
 }
