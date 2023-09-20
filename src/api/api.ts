@@ -88,15 +88,15 @@ export const API = {
             const response = await instance.get(`logout`);
             return response.data;
         },
-        async register({email, username, password, agreement}:returnFinishReg) {
-        const response = await instance.post(`register`, {
-            email,
-            username,
-            password,
-            agreement
-        });
-        return response.data;
-    },
+        async register({email, username, password, agreement}: returnFinishReg) {
+            const response = await instance.post(`register`, {
+                email,
+                username,
+                password,
+                agreement
+            });
+            return response.data;
+        },
     },
     Rating: {
         async getUsers() {
@@ -105,13 +105,28 @@ export const API = {
         }
     },
     User: {
+        // получить данные о юзере
         async getUser(userId: string | undefined) {
             const response = await instance.get(`user/${userId}`);
             return response.data;
         },
+        // подписка на юзера
+        async subscribe(userId: string | null) {
+            const response = await instance.put(`subscribe`, {
+                to_user_id: userId
+            });
+            return response.data;
+        },
+        // отписка от юзера
+        async unsubscribe(userId: string | null) {
+            const response = await instance.put(`unsubscribe`, {
+                to_user_id: userId
+            });
+            return response.data;
+        }
     },
     Post: {
-        async sendScore({postId, score}:sendScoreType) {
+        async sendScore({postId, score}: sendScoreType) {
             const response = await instance.put(`post_rating`, {
                 post_id: postId,
                 score: score

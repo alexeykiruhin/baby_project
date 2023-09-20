@@ -1,24 +1,24 @@
 export interface AuthorType {
-  id: number;
-  img: string;
-  username: string;
+    id: number;
+    img: string;
+    username: string;
 }
 
 export interface RatingType {
-  result: number;
+    result: number;
 }
 
 export interface TagType {
-  tag_name: string;
+    tag_name: string;
 }
 
 export interface PostType {
-  author: AuthorType;
-  id: string;
-  rating: RatingType;
-  tags: TagType[];
-  text: string;
-  subject: string;
+    author: AuthorType;
+    id: string;
+    rating: RatingType;
+    tags: TagType[];
+    text: string;
+    subject: string;
 }
 
 export type PostProps = {
@@ -27,17 +27,22 @@ export type PostProps = {
 }
 
 export type LoginPass = {
-  username: string,
-  password: string
+    username: string,
+    password: string
 }
 
 export type PostListComponentPropsType = {
     items: Array<PostType>
 }
 
+export type SubUnsubPropsType = {
+    subscribe: (userId: string | null) => void
+    unsubscribe: (userId: string | null) => void
+}
+
 export type sendScoreType = {
-  postId: string | undefined
-  score: number
+    postId: string | undefined
+    score: number
 }
 
 // Registration

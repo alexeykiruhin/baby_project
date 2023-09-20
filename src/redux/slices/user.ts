@@ -38,9 +38,27 @@ const initialState = {
 } as userType
 
 //Проверка аутентификации
-export const fetchUser = createAsyncThunk('user/fetchUser', async (userId : string | undefined) => {
+export const fetchUser = createAsyncThunk('user/fetchUser', async (userId: string | undefined) => {
     try {
         return await API.User.getUser(userId);
+    } catch (error) {
+        throw error;
+    }
+});
+
+//Подписка
+export const subscribed = createAsyncThunk('user/subscribe', async (userId: string | null) => {
+    try {
+        return await API.User.subscribe(userId);
+    } catch (error) {
+        throw error;
+    }
+});
+
+//Отписка
+export const unsubscribed = createAsyncThunk('user/unsubscribe', async (userId: string | null) => {
+    try {
+        return await API.User.unsubscribe(userId);
     } catch (error) {
         throw error;
     }
@@ -71,10 +89,22 @@ const userSlice = createSlice({
                 state.isSubs = action.payload.user_info.isSubs;
                 state.posts = action.payload.user_posts;
             })
-        // .addCase(fetchUser.rejected, (state, action) => {
-        //     state.status = 'failed';
-        //     state.error = action.error.message;
-        // })
+            .addCase(fetchUser.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+        // Обработка subscribe
+        builder
+            .addCase(subscribed.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.isSubs = action.payload.subs
+            })
+        // Обработка unsubscribe
+        builder
+            .addCase(unsubscribed.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.isSubs = action.payload.isSubs
+            })
     },
 });
 
