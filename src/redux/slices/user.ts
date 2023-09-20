@@ -98,12 +98,14 @@ const userSlice = createSlice({
             .addCase(subscribed.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.isSubs = action.payload.subs
+                state.subscribers = action.payload.subscribers
             })
         // Обработка unsubscribe
         builder
             .addCase(unsubscribed.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.isSubs = action.payload.isSubs
+                state.subscribers = action.payload.subscribers
             })
     },
 });

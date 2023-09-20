@@ -8,13 +8,12 @@ import {subscribed} from '../../redux/slices/user';
 const UserViewContainer: React.FC = () => {
     const posts = useAppSelector(state => state.user.posts)
     const userInfo = useAppSelector(state => state.user)
-    const subscribers = useAppSelector(state => state.user.subscribers)
     const dispatch = useAppDispatch();
     const paramUserId = useParams();
     useEffect(() => {
         console.log('all')
         dispatch(fetchUser(paramUserId.userId));
-    }, [dispatch, paramUserId.userId, subscribers])
+    }, [dispatch, paramUserId.userId])
 
     const subscribe = (userId: string | null) => {
         console.log(userId)
