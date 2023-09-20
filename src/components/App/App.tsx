@@ -8,7 +8,8 @@ import RatingComponent from '../Rating/RatingComponent';
 import CreateComponent from '../Create/CreateComponent';
 import UserInfoComponent from '../UserInfo/UserInfoComponent';
 import LoginContainer from '../Login/LoginContainer';
-import UserViewComponent from '../UserView/UserViewComponent';
+import UserViewContainer from '../UserView/UserViewContainer';
+import RegContainer from '../Reg/RegContainer';
 
 export const {Content} = Layout;
 
@@ -34,10 +35,10 @@ const App: React.FC = () => {
                             <Route path="/rating" element={<RatingComponent/>}/>
                             <Route path="/create" element={<CreateComponent/>}/>
                             <Route path="/login" element={<LoginContainer/>}/>
-                            {/*// /!*<Route path="/register" element={<Reg/>}/>*!/*/}
+                            <Route path="/reg" element={<RegContainer/>}/>
                             {/*// /!*<Route path="/create" element={<CreatePostContainer/>}/>*!/*/}
                             {/*// /!*<Route path="/users" element={<UsersContainer/>}/>*!/*/}
-                            <Route path="/user/:userId" element={<UserViewComponent/>}/>
+                            <Route path="/user/:userId" element={<UserViewContainer/>}/>
                             {/*// /!*<Route path="/post/:postId" element={<PostViewContainer/>}/>*!/*/}
                             {/*// /!*<Route path="/tag-search" element={<TagSearch/>}/>*!/*/}
                         </Routes>

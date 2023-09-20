@@ -1,9 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {API} from '../../api/api';
-import {PostType} from '../../types/types';
+import {PostType, sendScoreType} from '../../types/types';
 
 export interface homeType {
-    posts: Array<PostType> | Array<null>,
+    posts: Array<PostType>// | Array<null>,
     status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: any
 }
@@ -21,7 +21,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
         // const response: ApiResponse = await API.Home.getPosts(1,5);
         // return response;
         console.log('all');
-        return await API.Home.getPosts(1,5);
+        return await API.Home.getPosts(1, 5);
     } catch (error) {
         throw error;
     }
@@ -33,7 +33,16 @@ export const fetchSubPosts = createAsyncThunk('posts/fetchSubPosts', async () =>
         // const response: ApiResponse = await API.Home.getPosts(1,5);
         // return response;
         console.log('sub');
-        return await API.Home.getSubPosts(1,5);
+        return await API.Home.getSubPosts(1, 5);
+    } catch (error) {
+        throw error;
+    }
+});
+
+//Обновление рейтинга поста
+export const changeRatingPost = createAsyncThunk('posts/changeRatingPost', async ({postId, score}: sendScoreType) => {
+    try {
+        return await API.Post.sendScore({postId, score});
     } catch (error) {
         throw error;
     }
@@ -68,6 +77,29 @@ const homeSlice = createSlice({
             .addCase(fetchSubPosts.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
+            })
+            // Рейтинг поста
+            .addCase(changeRatingPost.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // state.posts = action.payload.posts;
+                // находим индекс поста по его айди
+                const postIndex = state.posts?.findIndex((p) => {
+                    return p?.id === action.payload.new_rating.post_id
+                })
+                // console.log(postIndex)
+                // обновляем найденный пост
+                const updatedPost = {
+                    ...state.posts[postIndex],
+                    rating: action.payload.new_rating.result
+                };
+                // обновляем массив постов по частям
+                const updatedPosts = [
+                    ...state.posts.slice(0, postIndex),
+                    updatedPost,
+                    ...state.posts.slice(postIndex + 1)
+                ];
+                state.posts = updatedPosts
+
             })
     },
 });

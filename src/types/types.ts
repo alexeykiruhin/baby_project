@@ -14,7 +14,7 @@ export interface TagType {
 
 export interface PostType {
   author: AuthorType;
-  id: number;
+  id: string;
   rating: RatingType;
   tags: TagType[];
   text: string;
@@ -23,10 +23,27 @@ export interface PostType {
 
 export type PostProps = {
     index: number,
-    post: PostType | null
+    post: PostType
 }
 
 export type LoginPass = {
   username: string,
   password: string
+}
+
+export type PostListComponentPropsType = {
+    items: Array<PostType>
+}
+
+export type sendScoreType = {
+  postId: string | undefined
+  score: number
+}
+
+// Registration
+export type returnFinishReg = {
+    email: string,
+    username: string,
+    password: string,
+    remember: boolean
 }

@@ -1,4 +1,5 @@
 import axios, {AxiosInstance} from 'axios';
+import {returnFinishReg, sendScoreType} from '../types/types';
 
 const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
 
@@ -87,12 +88,34 @@ export const API = {
             const response = await instance.get(`logout`);
             return response.data;
         },
+        async register({email, username, password, remember}:returnFinishReg) {
+        const response = await instance.post(`register`, {
+            email,
+            username,
+            password,
+        });
+        return response.data;
+    },
     },
     Rating: {
         async getUsers() {
             const response = await instance.get(`users`);
             return response.data;
         }
+    },
+    User: {
+        async getUser(userId: string | undefined) {
+            const response = await instance.get(`user/${userId}`);
+            return response.data;
+        },
+    },
+    Post: {
+        async sendScore({postId, score}:sendScoreType) {
+            const response = await instance.put(`post_rating`, {
+                post_id: postId,
+                score: score
+            });
+            return response.data;
+        },
     }
-
 }

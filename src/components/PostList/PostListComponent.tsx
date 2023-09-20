@@ -1,19 +1,13 @@
-import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {fetchPosts} from '../../redux/slices/home';
+import React from 'react';
 import PostViewComponent from '../PostView/PostViewComponent';
 import {FloatButton, Space} from 'antd';
+import {PostListComponentPropsType} from '../../types/types';
 
-const PostListComponent: React.FC = () => {
-    const posts = useAppSelector(state => state.home.posts)
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        console.log('all')
-        dispatch(fetchPosts());
-    }, [dispatch])
+const PostListComponent: React.FC<PostListComponentPropsType> = ({items}) => {
+
     return (
         <Space direction="vertical" size="middle" style={{display: 'flex'}}>
-            {posts?.map((post, index) => <PostViewComponent key={index} index={index} post={post}/>)}
+            {items.map((item, index) => <PostViewComponent key={index} index={index} post={item}/>)}
             <FloatButton.BackTop visibilityHeight={300}/>
         </Space>
     )

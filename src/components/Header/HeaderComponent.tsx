@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout} from "antd";
 import styles from './Header.module.css';
 import MenuComponent from "../Menu/MenuComponent";
+import {NavLink} from 'react-router-dom';
 
 const {Header} = Layout;
 
@@ -18,7 +19,7 @@ const HeaderComponent: React.FC= () => {
             }}
             color={'light'}
         >
-            <div className={styles.Logo}>Logo</div>
+            <NavLink to='/'><div className={styles.Logo}><h3 style={{color: '#1677ff'}}>TrendTide</h3></div></NavLink>
             <MenuComponent/>
         </Header>
     )

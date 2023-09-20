@@ -2,17 +2,17 @@ import React from 'react';
 import styles from './Home.module.css';
 import {Tabs} from 'antd';
 import type {TabsProps} from 'antd';
-import PostListComponent from '../PostList/PostListComponent';
 import SubPostListComponent from '../SubPostList/SubPostListComponent';
 import {useAppDispatch} from '../../hooks/hooks';
 import {fetchPosts, fetchSubPosts} from '../../redux/slices/home';
+import PostListContainer from '../PostList/PostListContainer';
 
 
 const items: TabsProps['items'] = [
     {
         key: '1',
         label: 'Все',
-        children: <PostListComponent/>,
+        children: <PostListContainer/>,
     },
     {
         key: '2',

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Reg.module.css';
-import {returnFinishReg} from "./RegContainer";
+import {returnFinishReg} from '../../types/types';
 import {Button, Checkbox, Form, Input} from "antd";
 
 
@@ -100,10 +100,10 @@ const Reg: React.FC<Props> = ({onFinish}) => {
                 </Form.Item>
 
                 <Form.Item
-                    name="nickname"
-                    label="Nickname"
+                    name="username"
+                    label="Username"
                     tooltip="What do you want others to call you?"
-                    rules={[{required: true, message: 'Please input your nickname!', whitespace: true}]}
+                    rules={[{required: true, message: 'Please input your username!', whitespace: true}]}
                 >
                     <Input/>
                 </Form.Item>

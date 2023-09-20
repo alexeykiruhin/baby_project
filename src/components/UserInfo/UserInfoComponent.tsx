@@ -20,6 +20,7 @@ const UserInfoComponent: React.FC = () => {
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const img = useAppSelector(state => state.auth.img)
     const id = useAppSelector(state => state.auth.id)
+    const isReg = useAppSelector(state => state.auth.isReg)
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(checkAuth());
@@ -44,9 +45,17 @@ const UserInfoComponent: React.FC = () => {
                             Logout
                         </Button>
                     </>
-                    : <NavLink to={'/login'}>
-                        <Button size={'middle'}>Login</Button>
-                    </NavLink>
+                    : <>
+                        <NavLink to={'/login'} style={{marginRight: '10px'}}>
+                            <Button size={'middle'}>Login</Button>
+                        </NavLink>
+                        {!isReg &&
+                            <NavLink to={'/reg'}>
+                                <Button size={'middle'}>Registration</Button>
+                            </NavLink>
+                        }
+
+                    </>
             }
         </div>
     );

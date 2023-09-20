@@ -3,6 +3,7 @@ import styles from './Login.module.css';
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
 import {Button, Checkbox, Form, Input} from 'antd';
 import {returnFinishLogin} from "./LoginContainer";
+import {NavLink} from 'react-router-dom';
 
 type Props = {
     onFinish: (values: returnFinishLogin) => void
@@ -47,7 +48,7 @@ const LoginComponent: React.FC<Props> = ({onFinish}) => {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    <span> Or</span> <a href="https://ya.ru">register now!</a>
+                    <span> Or</span> <NavLink to={'/reg'}>register now!</NavLink>
                 </Form.Item>
             </Form>
         </div>

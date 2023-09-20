@@ -1,19 +1,30 @@
 import React from 'react';
-import Reg from "./Reg";
+import Reg from './Reg';
+import {returnFinishReg} from '../../types/types';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
+import {register} from '../../redux/slices/auth';
+import {Navigate} from 'react-router-dom';
 
-export type returnFinishReg = {
-    username: string,
-    password: string,
-    remember: boolean
-}
+
+// email: 'as@sd.ru', password: 'sd', confirm: 'sd', nickname: 'sd', agreement: true
 
 const RegContainer: React.FC = () => {
+    const dispatch = useAppDispatch()
+    const isReg = useAppSelector(state => state.auth.isReg)
 
     const onFinish = (values: returnFinishReg): void => {
-        console.log('Received values of form: ', values);
+        console.log('Registration: ', values);
+        dispatch(register(values))
     }
 
-    return <Reg onFinish={onFinish}/>
+
+    return (
+        <>
+
+            {isReg ? <Navigate to="/login" replace={true}/> : <Reg onFinish={onFinish}/>}
+            {/*<Reg onFinish={onFinish}/>*/}
+        </>
+    )
 }
 
 export default RegContainer;
