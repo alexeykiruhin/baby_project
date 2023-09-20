@@ -54,7 +54,6 @@ const UserInfoComponent: React.FC = () => {
                                 <Button size={'middle'}>Registration</Button>
                             </NavLink>
                         }
-
                     </>
             }
         </div>

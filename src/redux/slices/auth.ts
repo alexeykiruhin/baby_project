@@ -73,10 +73,10 @@ export const register = createAsyncThunk('auth/register', async ({
                                                                      email,
                                                                      username,
                                                                      password,
-                                                                     remember
+                                                                     agreement
                                                                  }: returnFinishReg) => {
     try {
-        return await API.Auth.register({email, username, password, remember});
+        return await API.Auth.register({email, username, password, agreement});
     } catch (error) {
         console.log('ОШИБКА')
         throw error;

@@ -45,5 +45,5 @@ export type returnFinishReg = {
     email: string,
     username: string,
     password: string,
-    remember: boolean
+    agreement: boolean,
 }

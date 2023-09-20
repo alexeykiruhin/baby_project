@@ -88,11 +88,12 @@ export const API = {
             const response = await instance.get(`logout`);
             return response.data;
         },
-        async register({email, username, password, remember}:returnFinishReg) {
+        async register({email, username, password, agreement}:returnFinishReg) {
         const response = await instance.post(`register`, {
             email,
             username,
             password,
+            agreement
         });
         return response.data;
     },
