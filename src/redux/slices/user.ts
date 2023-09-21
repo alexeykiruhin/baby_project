@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {API} from '../../api/api';
-import {PostType, sendScoreType} from '../../types/types';
+import {editStatusType, PostType, sendScoreType} from '../../types/types';
 
 export interface userType {
     isMe: boolean,
@@ -65,9 +65,20 @@ export const unsubscribed = createAsyncThunk('user/unsubscribe', async (userId: 
 });
 
 //Обновление рейтинга поста
-export const changeUserRatingPost = createAsyncThunk('posts/changeRatingPost', async ({postId, score}: sendScoreType) => {
+export const changeUserRatingPost = createAsyncThunk('posts/changeRatingPost', async ({
+                                                                                          postId,
+                                                                                          score
+                                                                                      }: sendScoreType) => {
     try {
         return await API.Post.sendScore({postId, score});
+    } catch (error) {
+        throw error;
+    }
+});
+//Изменение статуса
+export const editStatusText = createAsyncThunk('user/editStatus', async ({uid, text}: editStatusType) => {
+    try {
+        return await API.User.editStatus(uid, text);
     } catch (error) {
         throw error;
     }
@@ -138,6 +149,12 @@ const userSlice = createSlice({
                     ...state.posts.slice(postIndex + 1)
                 ];
                 state.posts = updatedPosts
+            })
+        // Обработка изменения статуса
+        builder
+            .addCase(editStatusText.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.statusText = action.payload.statusText
             })
     },
 });

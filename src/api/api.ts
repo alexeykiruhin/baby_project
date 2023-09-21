@@ -123,7 +123,13 @@ export const API = {
                 to_user_id: userId
             });
             return response.data;
-        }
+        },
+        async editStatus(userId: string | undefined, statusText: string | null) {
+            const response = await instance.post(`user/${userId}`, {
+                statusText: statusText,
+            });
+            return response.data;
+        },
     },
     Post: {
         async sendScore({postId, score}: sendScoreType) {
