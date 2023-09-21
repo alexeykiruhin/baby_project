@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {API} from '../../api/api';
-import {PostType} from '../../types/types';
+import {PostType, sendScoreType} from '../../types/types';
 
 export interface userType {
     isMe: boolean,
@@ -64,6 +64,15 @@ export const unsubscribed = createAsyncThunk('user/unsubscribe', async (userId: 
     }
 });
 
+//Обновление рейтинга поста
+export const changeUserRatingPost = createAsyncThunk('posts/changeRatingPost', async ({postId, score}: sendScoreType) => {
+    try {
+        return await API.Post.sendScore({postId, score});
+    } catch (error) {
+        throw error;
+    }
+});
+
 const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -107,12 +116,35 @@ const userSlice = createSlice({
                 state.isSubs = action.payload.isSubs
                 state.subscribers = action.payload.subscribers
             })
+        builder
+            // Рейтинг поста
+            .addCase(changeUserRatingPost.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // state.posts = action.payload.posts;
+                // находим индекс поста по его айди
+                const postIndex = state.posts?.findIndex((p) => {
+                    return p?.id === action.payload.new_rating.post_id
+                })
+                // console.log(postIndex)
+                // обновляем найденный пост
+                const updatedPost = {
+                    ...state.posts[postIndex],
+                    rating: action.payload.new_rating.result
+                };
+                // обновляем массив постов по частям
+                const updatedPosts = [
+                    ...state.posts.slice(0, postIndex),
+                    updatedPost,
+                    ...state.posts.slice(postIndex + 1)
+                ];
+                state.posts = updatedPosts
+            })
     },
 });
 
 // Слайс генерирует действия, которые экспортируются отдельно
 // Действия генерируются автоматически из имен ключей редьюсеров
-// export const { getPosts } = homeSlice.actions;
+// export const {updateUserPostData} = userSlice.actions;
 
 // По умолчанию экспортируется редьюсер, сгенерированный слайсом
 export default userSlice.reducer;

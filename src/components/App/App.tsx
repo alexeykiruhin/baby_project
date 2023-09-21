@@ -27,7 +27,7 @@ const App: React.FC = () => {
                 <HeaderContainer/>
                 <UserInfoComponent/>
                 <Content className="site-layout"
-                         style={{padding: '0 50px', minHeight: '81vh', marginTop: '100px'}}>
+                         style={{padding: '0 50px', minHeight: '81vh'}}>
                     {/*<div style={{padding: 24, minHeight: 380}}>*/}
                         {/*, background: colorBgContainer*/}
                         <Routes>

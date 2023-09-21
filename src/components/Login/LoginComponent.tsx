@@ -13,7 +13,7 @@ const LoginComponent: React.FC<Props> = ({onFinish}) => {
 
     return (
         <div className={styles.Login}
-             style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
+             style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '100px'}}
         >
             <Title level={3} style={{margin: '0 0 20px 0'}}>
                 Login

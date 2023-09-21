@@ -99,7 +99,6 @@ const homeSlice = createSlice({
                     ...state.posts.slice(postIndex + 1)
                 ];
                 state.posts = updatedPosts
-
             })
     },
 });

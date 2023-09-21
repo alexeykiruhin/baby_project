@@ -6,6 +6,7 @@ import TagsViewComponent from '../TagsView/TagsViewComponent';
 import {DislikeOutlined, LikeOutlined} from '@ant-design/icons';
 import {changeRatingPost} from '../../redux/slices/home';
 import {useAppDispatch} from '../../hooks/hooks';
+import {changeUserRatingPost} from '../../redux/slices/user';
 
 
 const PostViewComponent = ({index, post}: PostProps) => {
@@ -18,6 +19,7 @@ const PostViewComponent = ({index, post}: PostProps) => {
             score: 1
         }
         dispatch(changeRatingPost(ratingData));
+        dispatch(changeUserRatingPost(ratingData));
     }
 
     const sendScoreMinus = () => {
@@ -26,6 +28,7 @@ const PostViewComponent = ({index, post}: PostProps) => {
             score: 0
         }
         dispatch(changeRatingPost(ratingData));
+        dispatch(changeUserRatingPost(ratingData));
     }
 
     return (
