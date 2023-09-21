@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './Login.module.css';
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
 import {Button, Checkbox, Form, Input} from 'antd';
-import {returnFinishLogin} from "./LoginContainer";
+import {returnFinishLogin} from './LoginContainer';
 import {NavLink} from 'react-router-dom';
+import Title from 'antd/es/typography/Title';
 
 type Props = {
     onFinish: (values: returnFinishLogin) => void
@@ -11,7 +12,12 @@ type Props = {
 const LoginComponent: React.FC<Props> = ({onFinish}) => {
 
     return (
-        <div className={styles.Login}>
+        <div className={styles.Login}
+             style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
+        >
+            <Title level={3} style={{margin: '0 0 20px 0'}}>
+                Login
+            </Title>
             <Form
                 name="normal_login"
                 className="login-form"

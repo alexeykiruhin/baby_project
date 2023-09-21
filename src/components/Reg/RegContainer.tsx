@@ -1,5 +1,5 @@
 import React from 'react';
-import Reg from './Reg';
+import Reg from './RegComponent';
 import {returnFinishReg} from '../../types/types';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {register} from '../../redux/slices/auth';

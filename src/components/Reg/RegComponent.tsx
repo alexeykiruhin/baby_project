@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Reg.module.css';
 import {returnFinishReg} from '../../types/types';
 import {Button, Checkbox, Form, Input} from "antd";
+import Title from 'antd/es/typography/Title';
 
 
 type Props = {
@@ -32,17 +33,22 @@ const formItemLayout = {
     },
 };
 
-const Reg: React.FC<Props> = ({onFinish}) => {
+const RegComponent: React.FC<Props> = ({onFinish}) => {
     const [form] = Form.useForm();
     return (
-        <div className={styles.Reg}>
+        <div className={styles.Reg}
+            style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
+        >
+            <Title level={3} style={{margin: '0 0 20px 0'}}>
+                Registration
+            </Title>
             <Form
                 {...formItemLayout}
                 form={form}
                 name="register"
                 onFinish={onFinish}
                 initialValues={{residence: ['zhejiang', 'hangzhou', 'xihu'], prefix: '86'}}
-                style={{maxWidth: 600}}
+                style={{minWidth: 450}}
                 scrollToFirstError
             >
                 <Form.Item
@@ -133,4 +139,4 @@ const Reg: React.FC<Props> = ({onFinish}) => {
     )
 }
 
-export default Reg;
+export default RegComponent;
