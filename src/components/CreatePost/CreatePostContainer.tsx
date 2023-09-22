@@ -13,30 +13,35 @@ const CreatePostContainer: React.FC = () => {
     const dispatch = useAppDispatch()
 
     let file = ''
+    let tags = ''
     const onUpload = (name: string) => {
         console.log('name:', name);
         file = name
     };
 
+    const setTags = (value: string) => {
+        console.log(`selected ${value}`);
+        tags = value
+    };
+
     const onFinish = (values: any) => {
         values.File = file
-        console.log('[values.File.Tags]', values.Tags);
         const postData: PostDataType = {
             title: values.Subject,
             text: values.Text,
             file: values.File,
-            tags: values.Tags,       // Поле "теги" представлено массивом строк
+            tags: tags       // Поле "теги" представлено массивом строк
         }
         dispatch(createPost(postData))
     }
 
-    console.log(`isCreated - ${isCreated}`)
     return (
         <>
             {isCreated && <Navigate to="/" replace={true}/>}
             <CreatePostComponent
                 onFinish={onFinish}
                 onUpload={onUpload}
+                setTags={setTags}
             />
         </>
     )

@@ -157,6 +157,11 @@ export const API = {
                 post_data: postData
             })
             return response.data;
-        }
+        },
+        // получить теги
+        async getTags() {
+            const response = await instance.get(`get_tags`);
+            return response.data;
+        },
     }
 }

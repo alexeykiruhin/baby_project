@@ -91,4 +91,5 @@ export type PostDataType = {
 export type CreatePostType = {
     onFinish: (values: any) => void
     onUpload: (values: any) => void
+    setTags?: (values: any) => void
 }

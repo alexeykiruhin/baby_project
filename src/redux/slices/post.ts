@@ -6,6 +6,7 @@ export interface ratingType {
     isCreated: boolean
     status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: any
+    tags?: Array<string>
 }
 
 // Начальное значение
@@ -13,6 +14,7 @@ const initialState = {
     isCreated: false,
     status: 'idle',
     error: null,
+    tags: []
 } as ratingType
 
 // Создание поста
@@ -24,11 +26,20 @@ export const createPost = createAsyncThunk('post/createPost', async (postData: P
     }
 });
 
+// Получить теги
+export const getTags = createAsyncThunk('post/getTags', async () => {
+    try {
+        return await API.Post.getTags();
+    } catch (error) {
+        throw error;
+    }
+});
+
 const postSlice = createSlice({
     name: 'post',
     initialState,
     reducers: {
-         // Добавляем редьюсер для изменения isCreated
+        // Добавляем редьюсер для изменения isCreated
         setIsCreated: (state, action) => {
             state.isCreated = action.payload;
         },
@@ -41,12 +52,18 @@ const postSlice = createSlice({
                 state.isCreated = action.payload.isCreate
                 setIsCreated(false)
             })
+        builder
+            // Получить теги
+            .addCase(getTags.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.tags = action.payload
+            })
     },
 });
 
 // Слайс генерирует действия, которые экспортируются отдельно
 // Действия генерируются автоматически из имен ключей редьюсеров
-export const { setIsCreated } = postSlice.actions;
+export const {setIsCreated} = postSlice.actions;
 
 // По умолчанию экспортируется редьюсер, сгенерированный слайсом
 export default postSlice.reducer;
