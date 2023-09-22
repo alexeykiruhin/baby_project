@@ -4,6 +4,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {createPost} from '../../redux/slices/post';
 import {PostDataType} from '../../types/types';
 import {Navigate} from 'react-router-dom';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 
 const CreatePostContainer: React.FC = () => {
@@ -47,4 +48,8 @@ const CreatePostContainer: React.FC = () => {
     )
 }
 
-export default CreatePostContainer;
+const CreatePostWithRedirect = withAuthRedirect(CreatePostContainer)
+
+export default CreatePostWithRedirect;
+
+// export default CreatePostContainer;

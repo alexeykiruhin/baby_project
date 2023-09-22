@@ -4,6 +4,7 @@ import UserViewComponent from './UserViewComponent';
 import {editStatusText, fetchUser, unsubscribed} from '../../redux/slices/user';
 import {useParams} from 'react-router-dom';
 import {subscribed} from '../../redux/slices/user';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 const UserViewContainer: React.FC = () => {
     const posts = useAppSelector(state => state.user.posts)
@@ -47,5 +48,7 @@ const UserViewContainer: React.FC = () => {
         editNewText={editNewText}
     />
 }
+const UserViewCWithRedirect = withAuthRedirect(UserViewContainer)
 
-export default UserViewContainer;
+export default UserViewCWithRedirect;
+// export default UserViewContainer;
