@@ -15,12 +15,13 @@ export interface TagType {
 }
 
 export interface PostType {
-    author: AuthorType;
-    id: string;
-    rating: RatingType;
-    tags: TagType[];
-    text: string;
-    subject: string;
+    author: AuthorType
+    id: string
+    rating: RatingType
+    tags: TagType[]
+    text: string
+    subject: string
+    img: string
 }
 
 export type PostProps = {

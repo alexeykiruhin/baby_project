@@ -1,5 +1,5 @@
 import React from 'react'
-import {Avatar, Card, Divider, Progress} from 'antd';
+import {Avatar, Card, Divider, Progress, Image} from 'antd';
 import {PostProps, sendScoreType} from '../../types/types';
 import {NavLink} from 'react-router-dom';
 import TagsViewComponent from '../TagsView/TagsViewComponent';
@@ -30,7 +30,7 @@ const PostViewComponent = ({index, post}: PostProps) => {
         dispatch(changeRatingPost(ratingData));
         dispatch(changeUserRatingPost(ratingData));
     }
-
+    const url = 'http://127.0.0.1:5000/api/image/' + post.img
     return (
         <Card title={<NavLink to={'/rating'}>{post?.subject}</NavLink>}
               extra={<NavLink to={`/user/${post?.author.id}`}>
@@ -38,8 +38,16 @@ const PostViewComponent = ({index, post}: PostProps) => {
               </NavLink>}
               headStyle={{textAlign: 'left'}}
         >
+            {post.img &&
+                <>
+                    <Image
+                        width={600}
+                        src={url}
+                    />
+                    <Divider/>
+                </>
+            }
             <p style={{marginBottom: '25px'}}>{post?.text}</p>
-            {/*<Divider/>*/}
             <Divider/>
             <div style={{display: 'flex', justifyContent: 'center'}}>
                 <LikeOutlined
@@ -57,8 +65,8 @@ const PostViewComponent = ({index, post}: PostProps) => {
             </div>
             {/*можно прогрессбар вынести в отдельный компонент*/}
             {post.rating.result >= 0
-                ?<Progress strokeLinecap="butt" percent={post?.rating.result}/>
-                :<Progress strokeLinecap="butt" strokeColor={'red'} percent={-1 * post?.rating.result}/>
+                ? <Progress strokeLinecap="butt" percent={post?.rating.result}/>
+                : <Progress strokeLinecap="butt" strokeColor={'red'} percent={-1 * post?.rating.result}/>
             }
             {/*<Progress strokeLinecap="butt" percent={post?.rating.result}/>*/}
             <div style={{display: 'flex', justifyContent: 'center'}}>
