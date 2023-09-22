@@ -65,10 +65,27 @@ export type sendScoreType = {
     score: number
 }
 
+
 // Registration
+
 export type returnFinishReg = {
     email: string,
     username: string,
     password: string,
     agreement: boolean,
+}
+
+
+// Post
+
+export type PostDataType = {
+    title: string;
+    text: string;
+    file?: string | null; // Поле "файл" может быть строкой или null, если файл отсутствует
+    tags: string;       // Поле "теги" представлено строкой
+};
+
+export type CreatePostType = {
+    onFinish: (values: any) => void
+    onUpload: (values: any) => void
 }

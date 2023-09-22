@@ -1,7 +1,7 @@
 import axios, {AxiosInstance} from 'axios';
-import {returnFinishReg, sendScoreType} from '../types/types';
+import {PostDataType, returnFinishReg, sendScoreType} from '../types/types';
 
-const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
+export const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
 
 // Добавляем заголовки в запросы на сервер
 const instance: AxiosInstance = axios.create({
@@ -139,5 +139,24 @@ export const API = {
             });
             return response.data;
         },
+        async createPost(postData: PostDataType) {
+            const response = await instance.post(`posts`, {
+                post_data: postData
+            });
+            return response.data;
+        },
+        async delPost(postId: string) {
+            const response = await instance.post(`del_post`, {
+                post_id: postId
+            })
+            return response.data;
+        },
+        async editPost(postId: string, postData: PostDataType) {
+            const response = await instance.post(`edit_post`, {
+                post_id: postId,
+                post_data: postData
+            })
+            return response.data;
+        }
     }
 }
