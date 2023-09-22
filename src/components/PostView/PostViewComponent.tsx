@@ -9,7 +9,7 @@ import {useAppDispatch} from '../../hooks/hooks';
 import {changeUserRatingPost} from '../../redux/slices/user';
 
 
-const PostViewComponent = ({index, post}: PostProps) => {
+const PostViewComponent = ({index, post, width}: PostProps) => {
     const dispatch = useAppDispatch();
 
     const sendScorePlus = () => {
@@ -41,7 +41,7 @@ const PostViewComponent = ({index, post}: PostProps) => {
             {post.img &&
                 <>
                     <Image
-                        width={600}
+                        width={width}
                         src={url}
                     />
                     <Divider/>

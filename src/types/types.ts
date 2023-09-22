@@ -25,8 +25,9 @@ export interface PostType {
 }
 
 export type PostProps = {
-    index: number,
+    index: number
     post: PostType
+    width?: number
 }
 
 export type LoginPass = {
@@ -36,6 +37,7 @@ export type LoginPass = {
 
 export type PostListComponentPropsType = {
     items: Array<PostType>
+    width?: number
 }
 
 // User

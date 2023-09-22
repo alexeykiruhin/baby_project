@@ -106,7 +106,7 @@ const UserViewComponent: React.FC<
             </Col>
             <Col md={{span: 24}} lg={{span: 17}} style={{padding: '0 12px'}}>
                 <Card style={{padding: '24px', textAlign: 'center', borderRadius: '2px'}}>
-                    <PostListComponent items={items}/>
+                    <PostListComponent items={items} width={200}/>
                 </Card>
             </Col>
         </Row>

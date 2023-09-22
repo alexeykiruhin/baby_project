@@ -11,7 +11,7 @@ const PostListContainer: React.FC = () => {
         dispatch(fetchPosts());
     }, [dispatch])
 
-    return <PostListComponent items={posts}/>
+    return <PostListComponent items={posts} width={600}/>
 }
 
 export default PostListContainer;
