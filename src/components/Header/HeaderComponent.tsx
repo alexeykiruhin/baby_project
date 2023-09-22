@@ -17,7 +17,7 @@ const HeaderComponent: React.FC= () => {
                 display: 'flex',
                 alignItems: 'center',
             }}
-            color={'light'}
+            // color='light'
         >
             <NavLink to='/'><div className={styles.Logo}><h3 style={{color: '#1677ff'}}>TrendTide</h3></div></NavLink>
             <MenuComponent/>

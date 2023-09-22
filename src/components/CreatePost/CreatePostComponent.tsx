@@ -26,13 +26,13 @@ const CreatePostComponent: React.FC<CreatePostType> = ({onFinish, onUpload}) => 
                     name="Subject"
                     rules={[{required: true, message: 'Please input Subject'}]}
                 >
-                    <Input placeholder="Subject" maxLength={6}/>
+                    <Input placeholder="Subject" maxLength={30}/>
                 </Form.Item>
                 <Form.Item
                     name="Text"
                     rules={[{required: true, message: 'Please input Subject'}]}
                 >
-                    <TextArea rows={10} placeholder="Text" maxLength={6}/>
+                    <TextArea rows={10} placeholder="Text" maxLength={2000}/>
                 </Form.Item>
                 <Form.Item
                     name="Tags"

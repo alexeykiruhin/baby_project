@@ -37,6 +37,7 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
                   <Avatar src={post?.author.img}/><span> {post?.author.username}</span>
               </NavLink>}
               headStyle={{textAlign: 'left'}}
+              style={{maxWidth: '660px'}}
         >
             {post.img &&
                 <>
