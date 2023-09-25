@@ -14,7 +14,7 @@ export interface TagType {
     tag_name: string;
 }
 
-export interface PostType {
+export interface HomePostType {
     author: AuthorType
     id: string
     rating: RatingType
@@ -25,8 +25,8 @@ export interface PostType {
 }
 
 export type PostProps = {
-    index: number
-    post: PostType
+    index?: number
+    post: HomePostType
     width?: number
 }
 
@@ -36,7 +36,7 @@ export type LoginPass = {
 }
 
 export type PostListComponentPropsType = {
-    items: Array<PostType>
+    items: Array<HomePostType>
     width?: number
 }
 
@@ -79,7 +79,17 @@ export type returnFinishReg = {
 }
 
 
-// Post
+//Post
+
+export type EditPostPropsType = {
+    isEdited: boolean
+}
+
+
+export type EditPostType = {
+    postId?: string | undefined
+}
+
 
 export type PostDataType = {
     title: string;

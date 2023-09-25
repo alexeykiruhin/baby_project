@@ -1,11 +1,18 @@
 import React from 'react'
 import {Avatar, Button, Card, Col, Divider, Row, Statistic} from 'antd';
 import PostListComponent from '../PostList/PostListComponent';
-import {editStatusPropsType, newTextType, PostListComponentPropsType, SubUnsubPropsType} from '../../types/types';
+import {
+    EditPostPropsType,
+    editStatusPropsType,
+    newTextType,
+    PostListComponentPropsType,
+    SubUnsubPropsType
+} from '../../types/types';
 import Title from 'antd/es/typography/Title';
 import {DislikeOutlined, LikeOutlined} from '@ant-design/icons';
 import {userType} from '../../redux/slices/user';
 import UserViewStatusComponent from './UserViewStatusComponent';
+import EditPostWithRedirect from '../EditPost/EditPostContainer';
 
 
 const UserViewComponent: React.FC<
@@ -13,26 +20,28 @@ const UserViewComponent: React.FC<
     userType &
     SubUnsubPropsType &
     editStatusPropsType &
-    newTextType> = ({
-                        items,
-                        username,
-                        statusText,
-                        img,
-                        plus,
-                        minus,
-                        rating,
-                        subscribers,
-                        isSubs,
-                        isMe,
-                        subscribe,
-                        unsubscribe,
-                        userId,
-                        editStatus,
-                        isEdit,
-                        updateIsEdit,
-                        newText,
-                        editNewText
-                    }) => {
+    newTextType &
+    EditPostPropsType> = ({
+                              items,
+                              username,
+                              statusText,
+                              img,
+                              plus,
+                              minus,
+                              rating,
+                              subscribers,
+                              isSubs,
+                              isMe,
+                              subscribe,
+                              unsubscribe,
+                              userId,
+                              editStatus,
+                              isEdit,
+                              updateIsEdit,
+                              newText,
+                              editNewText,
+                              isEdited
+                          }) => {
 
 
     return (
@@ -46,7 +55,7 @@ const UserViewComponent: React.FC<
                     <Title level={3}>{username}</Title>
                     {/*<Title level={4}>{statusText}</Title>*/}
                     {isEdit && isMe
-                        ? 
+                        ?
                         // <Input
                         //     placeholder="Your title"
                         //     value={newText}
@@ -61,7 +70,7 @@ const UserViewComponent: React.FC<
                         //         editNewText(event.target.value)
                         //     }}
                         // />
-                        <UserViewStatusComponent  statusText={statusText} editStatus={editStatus}/>
+                        <UserViewStatusComponent statusText={statusText} editStatus={editStatus}/>
                         : <Title level={4} onClick={() => {
                             updateIsEdit(true)
                         }}>{statusText}</Title>
@@ -106,7 +115,10 @@ const UserViewComponent: React.FC<
             </Col>
             <Col md={{span: 24}} lg={{span: 17}} style={{padding: '0 12px'}}>
                 <Card style={{padding: '24px', textAlign: 'center', borderRadius: '2px'}}>
-                    <PostListComponent items={items} width={200}/>
+                    {isEdited
+                        ? <EditPostWithRedirect/>
+                        : <PostListComponent items={items} width={200}/>
+                    }
                 </Card>
             </Col>
         </Row>

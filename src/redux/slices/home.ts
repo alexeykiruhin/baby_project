@@ -1,9 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {API} from '../../api/api';
-import {PostType, sendScoreType} from '../../types/types';
+import {HomePostType, sendScoreType} from '../../types/types';
 
 export interface homeType {
-    posts: Array<PostType>// | Array<null>,
+    posts: Array<HomePostType>// | Array<null>,
     status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: any
 }

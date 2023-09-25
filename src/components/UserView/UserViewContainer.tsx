@@ -8,6 +8,7 @@ import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 const UserViewContainer: React.FC = () => {
     const posts = useAppSelector(state => state.user.posts)
+    const isEdited = useAppSelector(state => state.post.isEdited)
     const userInfo = useAppSelector(state => state.user)
 
     const [isEdit, updateIsEdit] = useState(false);
@@ -46,6 +47,7 @@ const UserViewContainer: React.FC = () => {
         updateIsEdit={updateIsEdit}
         newText={newText}
         editNewText={editNewText}
+        isEdited={isEdited}
     />
 }
 const UserViewCWithRedirect = withAuthRedirect(UserViewContainer)

@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {API} from '../../api/api';
-import {editStatusType, PostType, sendScoreType} from '../../types/types';
+import {editStatusType, HomePostType, sendScoreType} from '../../types/types';
 
 export interface userType {
     isMe: boolean,
@@ -14,7 +14,7 @@ export interface userType {
     minus: number,
     subscribers: number,
     isSubs: boolean,
-    posts: Array<PostType>,
+    posts: Array<HomePostType>,
     status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: any
 }

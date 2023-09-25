@@ -36,7 +36,6 @@ const App: React.FC = () => {
                         <Route path="/create" element={<CreatePostContainer/>}/>
                         <Route path="/login" element={<LoginContainer/>}/>
                         <Route path="/reg" element={<RegContainer/>}/>
-                        {/*// /!*<Route path="/create" element={<CreatePostContainer/>}/>*!/*/}
                         {/*// /!*<Route path="/users" element={<UsersContainer/>}/>*!/*/}
                         <Route path="/user/:userId" element={<UserViewContainer/>}/>
                         {/*// /!*<Route path="/post/:postId" element={<PostViewContainer/>}/>*!/*/}

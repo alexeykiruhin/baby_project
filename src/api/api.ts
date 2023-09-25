@@ -1,5 +1,5 @@
 import axios, {AxiosInstance} from 'axios';
-import {PostDataType, returnFinishReg, sendScoreType} from '../types/types';
+import {EditPostType, HomePostType, PostDataType, returnFinishReg, sendScoreType} from '../types/types';
 
 export const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
 
@@ -161,6 +161,11 @@ export const API = {
         // получить теги
         async getTags() {
             const response = await instance.get(`get_tags`);
+            return response.data;
+        },
+        // получить пост по айди
+        async getPostById(postId: string | undefined) {
+            const response = await instance.get(`post/${postId}`);
             return response.data;
         },
     }
