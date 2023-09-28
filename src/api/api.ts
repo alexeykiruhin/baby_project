@@ -1,5 +1,5 @@
 import axios, {AxiosInstance} from 'axios';
-import {EditPostType, HomePostType, PostDataType, returnFinishReg, sendScoreType} from '../types/types';
+import {PostDataType, returnFinishReg, sendScoreType} from '../types/types';
 
 export const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
 
@@ -151,9 +151,8 @@ export const API = {
             })
             return response.data;
         },
-        async editPost(postId: string, postData: PostDataType) {
+        async editPost(postData: PostDataType) {
             const response = await instance.post(`edit_post`, {
-                post_id: postId,
                 post_data: postData
             })
             return response.data;

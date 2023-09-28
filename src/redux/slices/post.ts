@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {API} from '../../api/api';
 import {EditPostType, HomePostType, PostDataType} from '../../types/types';
+import {editPostList} from './user';
 
 export interface postType {
     isEdited: boolean
@@ -39,6 +40,24 @@ const initialState = {
 export const createPost = createAsyncThunk('post/createPost', async (postData: PostDataType) => {
     try {
         return await API.Post.createPost(postData);
+    } catch (error) {
+        throw error;
+    }
+});
+
+// Редактирование поста
+export const editPost = createAsyncThunk('post/editPost', async (postData: PostDataType) => {
+    try {
+        return await API.Post.editPost(postData)
+    } catch (error) {
+        throw error;
+    }
+});
+
+// Удаление поста
+export const delPost = createAsyncThunk('post/delPost', async (postId: string) => {
+    try {
+        return await API.Post.delPost(postId)
     } catch (error) {
         throw error;
     }
@@ -98,6 +117,19 @@ const postSlice = createSlice({
             .addCase(getPost.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.post = action.payload
+            })
+        builder
+            // Редактировать пост
+            .addCase(editPost.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.post = action.payload
+            })
+        builder
+            // Удалить пост
+            .addCase(delPost.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                // editPostList(action.payload)
+                // state.post = action.payload
             })
     },
 });

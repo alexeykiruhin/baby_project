@@ -3,11 +3,11 @@ import {Avatar, Card, Divider, Progress, Image} from 'antd';
 import {PostProps, sendScoreType} from '../../types/types';
 import {NavLink} from 'react-router-dom';
 import TagsViewComponent from '../TagsView/TagsViewComponent';
-import {DislikeOutlined, LikeOutlined, SettingOutlined} from '@ant-design/icons';
+import {DeleteOutlined, DislikeOutlined, LikeOutlined, SettingOutlined} from '@ant-design/icons';
 import {changeRatingPost} from '../../redux/slices/home';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {changeUserRatingPost} from '../../redux/slices/user';
-import {setIsEdited, setPostId} from '../../redux/slices/post';
+import {changeUserRatingPost, editPostList} from '../../redux/slices/user';
+import {delPost, setIsEdited, setPostId} from '../../redux/slices/post';
 import EditPostWithRedirect from '../EditPost/EditPostContainer';
 
 
@@ -24,10 +24,19 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
         dispatch(changeUserRatingPost(ratingData));
     }
 
-    const handleSetIsEdited = (val: string) => {
-        console.log(`POST ID - ${post.id}`)
+    const handleSetIsEdited = () => {
+        console.log(`POST ID - ${post?.id}`)
         dispatch(setIsEdited(!isEdited))
-        dispatch(setPostId(post.id))
+        dispatch(setPostId(post?.id))
+    }
+
+    // Удаление поста
+    const handleDelete = () => {
+        if (post?.id !== undefined) {
+            console.log('post?.id',post?.id)
+            dispatch(delPost(post?.id))
+            dispatch(editPostList(post?.id))
+        }
     }
 
     const sendScoreMinus = () => {
@@ -38,22 +47,26 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
         dispatch(changeRatingPost(ratingData));
         dispatch(changeUserRatingPost(ratingData));
     }
-    const url = 'http://127.0.0.1:5000/api/image/' + post.img
+    const url = 'http://127.0.0.1:5000/api/image/' + post?.img
     return (
         <>
             {isEdited
-                ? <EditPostWithRedirect />
+                ? <EditPostWithRedirect/>
                 : <Card title={<NavLink to={'/rating'}>{post?.subject}</NavLink>}
-                        extra={<NavLink to={`/user/${post?.author.id}`}>
+                        extra={<><NavLink to={`/user/${post?.author.id}`}>
                             {isMe && width === 200 // кастыль с шириной
-                                ? <SettingOutlined onClick={()=>{handleSetIsEdited(post.id)}}/> // тут передавать айди
+                                ? <SettingOutlined onClick={handleSetIsEdited}/>// тут передавать айди
                                 : <><Avatar src={post?.author.img}/><span> {post?.author.username}</span></>}
                             {/*<Avatar src={post?.author.img}/><span> {post?.author.username}</span>*/}
-                        </NavLink>}
+                        </NavLink>
+                            {isMe && width === 200 && <NavLink to={`/user/${post?.author.id}`}>
+                                <DeleteOutlined style={{marginLeft: '10px'}} onClick={handleDelete}/>
+                            </NavLink>}
+                        </>}
                         headStyle={{textAlign: 'left'}}
                         style={{maxWidth: '660px'}}
                 >
-                    {post.img &&
+                    {post?.img &&
                         <>
                             <Image
                                 width={width}
@@ -81,10 +94,12 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
                         />
                     </div>
                     {/*можно прогрессбар вынести в отдельный компонент*/}
-                    {post.rating.result >= 0
-                        ? <Progress strokeLinecap="butt" percent={post?.rating.result}/>
-                        : <Progress strokeLinecap="butt" strokeColor={'red'} percent={-1 * post?.rating.result}/>
-                    }
+
+                    {post?.rating?.result !== undefined && <>
+                        {post.rating?.result >= 0 && <Progress strokeLinecap="butt" percent={post?.rating.result}/>}
+                        {post.rating?.result < 0 && <Progress strokeLinecap="butt" strokeColor={'red'}
+                                                              percent={-1 * post?.rating.result}/>}
+                    </>}
                     {/*<Progress strokeLinecap="butt" percent={post?.rating.result}/>*/}
                     <div style={{display: 'flex', justifyContent: 'center'}}>
                         <DislikeOutlined

@@ -13,8 +13,8 @@ const CreatePostContainer: React.FC = () => {
 
     const dispatch = useAppDispatch()
 
-    let file = ''
     let tags = ''
+    let file = ''
     const onUpload = (name: string) => {
         console.log('name:', name);
         file = name

@@ -26,7 +26,7 @@ export interface HomePostType {
 
 export type PostProps = {
     index?: number
-    post: HomePostType
+    post: HomePostType | undefined
     width?: number
 }
 
@@ -92,10 +92,11 @@ export type EditPostType = {
 
 
 export type PostDataType = {
-    title: string;
-    text: string;
-    file?: string | null; // Поле "файл" может быть строкой или null, если файл отсутствует
-    tags: string;       // Поле "теги" представлено строкой
+    id?: string
+    title: string
+    text: string
+    file?: string | null // Поле "файл" может быть строкой или null, если файл отсутствует
+    tags: string       // Поле "теги" представлено строкой
 };
 
 export type CreatePostType = {

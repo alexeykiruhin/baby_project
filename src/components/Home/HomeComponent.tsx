@@ -6,7 +6,7 @@ import SubPostListComponent from '../SubPostList/SubPostListComponent';
 import {useAppDispatch} from '../../hooks/hooks';
 import {fetchPosts, fetchSubPosts} from '../../redux/slices/home';
 import PostListContainer from '../PostList/PostListContainer';
-import {setIsCreated} from '../../redux/slices/post';
+import {setIsCreated, setIsEdited} from '../../redux/slices/post';
 
 
 const items: TabsProps['items'] = [
@@ -24,6 +24,8 @@ const items: TabsProps['items'] = [
 
 const HomeComponent: React.FC = () => {
     const dispatch = useAppDispatch();
+
+    dispatch(setIsEdited(false))
     dispatch(setIsCreated(false))
     const onChange = (key: string) => {
         switch (key) {

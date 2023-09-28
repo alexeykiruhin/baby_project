@@ -87,7 +87,15 @@ export const editStatusText = createAsyncThunk('user/editStatus', async ({uid, t
 const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+        // Добавляем редьюсер для изменения постов после удаления
+        editPostList: (state, action) => {
+            // state.posts = action.payload;
+            console.log(`action.payload - ${action.payload}`)
+            console.log(`filter - ${state.posts.filter((post)=> post.id !== action.payload)}`)
+            state.posts = state.posts.filter((post)=> post.id !== action.payload)
+        },
+    },
     extraReducers: (builder) => {
         // Обработка fetchPosts
         builder
@@ -161,7 +169,7 @@ const userSlice = createSlice({
 
 // Слайс генерирует действия, которые экспортируются отдельно
 // Действия генерируются автоматически из имен ключей редьюсеров
-// export const {updateUserPostData} = userSlice.actions;
+export const {editPostList} = userSlice.actions;
 
 // По умолчанию экспортируется редьюсер, сгенерированный слайсом
 export default userSlice.reducer;
