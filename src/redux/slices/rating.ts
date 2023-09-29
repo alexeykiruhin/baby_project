@@ -1,14 +1,17 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {API} from '../../api/api';
+import {RatingUserType} from '../../types/types';
 
 export interface ratingType {
-    users: any,
-    status: 'idle' | 'loading' | 'succeeded' | 'failed',
+    count: number
+    users: RatingUserType[]
+    status: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: any
 }
 
 //Начальное значение
 const initialState = {
+    count: 0,
     users: [],
     status: 'idle', // 'idle', 'loading', 'succeeded', 'failed'
     error: null,
@@ -35,7 +38,8 @@ const ratingSlice = createSlice({
             })
             .addCase(fetchUsers.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.users = action.payload;
+                state.count = action.payload.count;
+                state.users = action.payload.users;
             })
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.status = 'failed';

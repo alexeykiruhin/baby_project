@@ -1,7 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {API} from '../../api/api';
 import {EditPostType, HomePostType, PostDataType} from '../../types/types';
-import {editPostList} from './user';
 
 export interface postType {
     isEdited: boolean

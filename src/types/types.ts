@@ -81,6 +81,17 @@ export type returnFinishReg = {
 
 //Post
 
+export type RatingUserType = {
+    id: string
+    img: string
+    minus: number
+    plus: number
+    rating: number
+    statusText: string
+    subscribers: number
+    username: string
+}
+
 export type EditPostPropsType = {
     isEdited: boolean
 }

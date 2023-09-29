@@ -4,12 +4,12 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {Layout} from 'antd';
 import HeaderContainer from '../Header/HeaderContainer';
 import FooterComponent from '../Footer/FooterComponent';
-import RatingComponent from '../Rating/RatingComponent';
 import UserInfoComponent from '../UserInfo/UserInfoComponent';
 import LoginContainer from '../Login/LoginContainer';
 import UserViewContainer from '../UserView/UserViewContainer';
 import RegContainer from '../Reg/RegContainer';
 import CreatePostContainer from '../CreatePost/CreatePostContainer';
+import RatingContainer from '../Rating/RatingContainer';
 
 export const {Content} = Layout;
 
@@ -32,7 +32,7 @@ const App: React.FC = () => {
                     {/*, background: colorBgContainer*/}
                     <Routes>
                         <Route path="/" element={<HomeComponent/>}/>
-                        <Route path="/rating" element={<RatingComponent/>}/>
+                        <Route path="/rating" element={<RatingContainer/>}/>
                         <Route path="/create" element={<CreatePostContainer/>}/>
                         <Route path="/login" element={<LoginContainer/>}/>
                         <Route path="/reg" element={<RegContainer/>}/>

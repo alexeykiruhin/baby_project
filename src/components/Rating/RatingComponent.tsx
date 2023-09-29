@@ -1,77 +1,37 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Space, Table, Tag} from 'antd';
-import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {fetchUsers} from '../../redux/slices/rating';
 
 const {Column} = Table;
 
-interface DataType {
+export interface DataType {
     key: React.Key;
-    name: string;
-    age: number;
-    address: string;
-    tags: string[];
+    username: string;
+    rating: number;
+    subscribers: number;
 }
 
-const data: DataType[] = [
-    {
-        key: '1',
-        name: 'John',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        name: 'Jim',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
 
-const RatingComponent: React.FC = () => {
-    const users = useAppSelector(state => state.rating.users)
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        dispatch(fetchUsers())
-    }, [dispatch])
+const RatingComponent: React.FC<{ out: DataType[] }> = ({out}) => {
     return (
-        <Table dataSource={data}>
-            <Column title="Name" dataIndex="name" key="name"/>
-            <Column title="Age" dataIndex="age" key="age"/>
-            <Column title="Address" dataIndex="address" key="address"/>
+        <Table dataSource={out}>
             <Column
-                title="Tags"
-                dataIndex="tags"
-                key="tags"
-                render={(tags: string[]) => (
-                    <>
-                        {tags.map((tag) => (
-                            <Tag color="blue" key={tag}>
-                                {tag}
-                            </Tag>
-                        ))}
-                    </>
-                )}
-            />
+                title="Name"
+                key="name"
+                render={(record: DataType) => (
+                    record.username
+                )}/>
             <Column
-                title="Action"
-                key="action"
-                render={(_: any, record: DataType) => (
-                    <Space size="middle">
-                        <a href="/">Invite {record.name}</a>
-                        <a href="/">Delete</a>
-                    </Space>
-                )}
-            />
+                title="Rating"
+                key="rating"
+                render={(record: DataType) => (
+                    record.rating
+                )}/>
+            <Column
+                title="Subscribers"
+                key="subscribers"
+                render={(record: DataType) => (
+                    record.subscribers
+                )}/>
         </Table>
     )
 }
