@@ -9,7 +9,7 @@ import {
     SubUnsubPropsType
 } from '../../types/types';
 import Title from 'antd/es/typography/Title';
-import {DislikeOutlined, LikeOutlined} from '@ant-design/icons';
+import {DislikeOutlined, EditOutlined, LikeOutlined} from '@ant-design/icons';
 import {userType} from '../../redux/slices/user';
 import UserViewStatusComponent from './UserViewStatusComponent';
 import EditPostWithRedirect from '../EditPost/EditPostContainer';
@@ -52,7 +52,7 @@ const UserViewComponent: React.FC<
                         style={{width: '110px', height: '110px'}}
                         src={img}
                     />
-                    <Title level={3}>{username}</Title>
+                    <Title level={3} style={{cursor: "default"}}>{username}</Title>
                     {/*<Title level={4}>{statusText}</Title>*/}
                     {isEdit && isMe
                         ?
@@ -73,10 +73,10 @@ const UserViewComponent: React.FC<
                         <UserViewStatusComponent statusText={statusText} editStatus={editStatus}/>
                         : <Title level={4} onClick={() => {
                             updateIsEdit(true)
-                        }}>{statusText}</Title>
+                        }}>{statusText} <EditOutlined /></Title>
                     }
-                    <Divider plain>Поставил</Divider>
-                    <Row gutter={16}>
+                    <Divider style={{cursor: "default"}} plain>Поставил</Divider>
+                    <Row style={{cursor: "default"}} gutter={16}>
                         <Col span={12}>
                             <Statistic value={plus} prefix={<LikeOutlined/>}/>
                         </Col>

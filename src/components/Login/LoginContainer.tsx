@@ -3,8 +3,8 @@ import LoginComponent from './LoginComponent';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {login} from '../../redux/slices/auth';
 import {LoginPass} from '../../types/types';
-import {Navigate} from 'react-router-dom';
 import {Alert} from 'antd';
+import {Navigate} from 'react-router-dom';
 
 export type returnFinishLogin = {
     username: string,
@@ -18,13 +18,26 @@ const LoginContainer: React.FC = () => {
     const status = useAppSelector(state => state.auth.status)
 
     const dispatch = useAppDispatch();
-    const onFinish = (values: returnFinishLogin): void => {
+    const onFinish = async (values: returnFinishLogin) => {
         console.log('Received values of form: ', values);
+
+
+        // const out: hash | string = await toHash(values.password)
+        //
+        // if (typeof out !== 'string') {
+        //     const loginData: LoginPass = {
+        //         username: values.username,
+        //         password: out.hash,
+        //     }
+        //     console.log('pass', loginData.password)
+        //     dispatch(login(loginData))
+        // }
         const loginData: LoginPass = {
-            username: values.username,
-            password: values.password
-        }
-        dispatch(login(loginData))
+                username: values.username,
+                password: values.password,
+            }
+            console.log('pass', loginData.password)
+            dispatch(login(loginData))
 
     };
     // Если логин успешный и нет ошибок, то проверяем переменную isAuth, она становится тру

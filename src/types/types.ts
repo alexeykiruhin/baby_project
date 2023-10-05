@@ -31,7 +31,7 @@ export type PostProps = {
 }
 
 export type LoginPass = {
-    username: string,
+    username: string
     password: string
 }
 

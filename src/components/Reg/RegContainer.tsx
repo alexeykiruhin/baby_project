@@ -12,17 +12,20 @@ const RegContainer: React.FC = () => {
     const dispatch = useAppDispatch()
     const isReg = useAppSelector(state => state.auth.isReg)
 
-    const onFinish = (values: returnFinishReg): void => {
-        console.log('Registration: ', values);
+    const onFinish = async (values: returnFinishReg) => {
+        // const out: hash | string = await toHash(values.password)
+        //
+        // if (typeof out !== 'string') {
+        //     values.password = out.hash
+        //     dispatch(register(values))
+        // }
         dispatch(register(values))
     }
 
 
     return (
         <>
-
             {isReg ? <Navigate to="/login" replace={true}/> : <Reg onFinish={onFinish}/>}
-            {/*<Reg onFinish={onFinish}/>*/}
         </>
     )
 }
