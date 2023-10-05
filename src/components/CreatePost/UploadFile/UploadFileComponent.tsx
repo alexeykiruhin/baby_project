@@ -12,8 +12,8 @@ const UploadFileComponent: React.FC<CreatePostType> = ({onUpload}) => {
     const [isErrorText, setIsErrorText] = useState('')
 
     const beforeUpload = (file: any) => {
-        // В этой функции можно выполнить различные проверки файла
-        // Например, проверить размер файла или его формат
+        // Функция проверки файла
+        // Проверяем размер файла и его формат
         const isFormat = file.type === 'image/gif' || 'image/png' || 'image/jpg' || 'image/jpeg'
         if (!isFormat) {
             setIsError(true)
