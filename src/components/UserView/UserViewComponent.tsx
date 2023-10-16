@@ -52,31 +52,15 @@ const UserViewComponent: React.FC<
                         style={{width: '110px', height: '110px'}}
                         src={img}
                     />
-                    <Title level={3} style={{cursor: "default"}}>{username}</Title>
-                    {/*<Title level={4}>{statusText}</Title>*/}
+                    <Title level={3} style={{cursor: 'default'}}>{username}</Title>
                     {isEdit && isMe
-                        ?
-                        // <Input
-                        //     placeholder="Your title"
-                        //     value={newText}
-                        //     onBlur={(event) => {
-                        //         console.log(event.target.value)
-                        //         editStatus(event.target.value)
-                        //     }}
-                        //     onSubmit={(event) => {
-                        //         console.log(event)
-                        //     }}
-                        //     onChange={(event) => {
-                        //         editNewText(event.target.value)
-                        //     }}
-                        // />
-                        <UserViewStatusComponent statusText={statusText} editStatus={editStatus}/>
+                        ? <UserViewStatusComponent statusText={statusText} editStatus={editStatus}/>
                         : <Title level={4} onClick={() => {
                             updateIsEdit(true)
-                        }}>{statusText} <EditOutlined /></Title>
+                        }}>{statusText} <EditOutlined/></Title>
                     }
-                    <Divider style={{cursor: "default"}} plain>Поставил</Divider>
-                    <Row style={{cursor: "default"}} gutter={16}>
+                    <Divider style={{cursor: 'default'}} plain>Поставил</Divider>
+                    <Row style={{cursor: 'default'}} gutter={16}>
                         <Col span={12}>
                             <Statistic value={plus} prefix={<LikeOutlined/>}/>
                         </Col>

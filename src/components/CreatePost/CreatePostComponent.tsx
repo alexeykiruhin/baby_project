@@ -12,11 +12,8 @@ const {TextArea} = Input;
 
 const CreatePostComponent: React.FC<CreatePostType> = ({onFinish, onUpload, setTags}) => {
     const dispatch = useAppDispatch()
-    let tags = useAppSelector(state => state.post.tags)
+    let tags = useAppSelector(state => state.post.AllTags) || []
     const options: SelectProps['options'] = [];
-    if (tags === undefined){
-        tags = []
-    }
 
     for (let i = 0; i < tags.length; i++) {
         options.push({
@@ -56,7 +53,7 @@ const CreatePostComponent: React.FC<CreatePostType> = ({onFinish, onUpload, setT
                 </Form.Item>
                 <Form.Item
                     name="Tags"
-                    rules={[{required: true, message: 'Please input Subject'}]}
+                    rules={[{required: true, message: 'Please input Tags'}]}
                 >
                     <Select
                         mode="tags"

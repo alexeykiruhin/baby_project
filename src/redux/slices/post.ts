@@ -7,7 +7,7 @@ export interface postType {
     isCreated: boolean
     status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: any
-    tags?: Array<string>
+    AllTags?: Array<string>
     postId?: string
     post?: HomePostType
 }
@@ -18,7 +18,7 @@ const initialState = {
     isCreated: false,
     status: 'idle',
     error: null,
-    tags: [],
+    AllTags: [],
     postId: '',
     post: {
         author: {
@@ -62,7 +62,7 @@ export const delPost = createAsyncThunk('post/delPost', async (postId: string) =
     }
 });
 
-// Получить теги
+// Получить все теги
 export const getTags = createAsyncThunk('post/getTags', async () => {
     try {
         return await API.Post.getTags();
@@ -109,7 +109,7 @@ const postSlice = createSlice({
             // Получить теги
             .addCase(getTags.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.tags = action.payload
+                state.AllTags = action.payload
             })
         builder
             // Получить посты

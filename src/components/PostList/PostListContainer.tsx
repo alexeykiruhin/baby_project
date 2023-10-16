@@ -7,7 +7,6 @@ const PostListContainer: React.FC = () => {
     const posts = useAppSelector(state => state.home.posts)
     const dispatch = useAppDispatch();
     useEffect(() => {
-        console.log('all')
         dispatch(fetchPosts());
     }, [dispatch])
 

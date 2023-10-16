@@ -1,4 +1,6 @@
 import React from 'react';
+import {SelectProps} from 'antd';
+import {UploadFile} from 'antd/es/upload/interface';
 
 export interface AuthorType {
     id: number;
@@ -114,4 +116,13 @@ export type CreatePostType = {
     onFinish: (values: any) => void
     onUpload: (values: any) => void
     setTags?: (values: any) => void
+}
+export type EditPostComponentType = {
+    onFinish: (values: any) => void
+    onCancel: (values: any) => void
+    onUpload: (values: any) => void
+    setTags?: (values: any) => void
+    // options: SelectProps['options']
+    fileList: UploadFile[]
+    // setTags?: (values: any) => void
 }

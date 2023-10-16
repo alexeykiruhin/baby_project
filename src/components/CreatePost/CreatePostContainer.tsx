@@ -26,11 +26,10 @@ const CreatePostContainer: React.FC = () => {
     };
 
     const onFinish = (values: any) => {
-        values.File = file
         const postData: PostDataType = {
             title: values.Subject,
             text: values.Text,
-            file: values.File,
+            file: file,
             tags: tags       // Поле "теги" представлено массивом строк
         }
         dispatch(createPost(postData))

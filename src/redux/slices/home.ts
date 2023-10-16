@@ -18,9 +18,6 @@ const initialState = {
 //Получаем посты
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
     try {
-        // const response: ApiResponse = await API.Home.getPosts(1,5);
-        // return response;
-        console.log('all');
         return await API.Home.getPosts(1, 5);
     } catch (error) {
         throw error;

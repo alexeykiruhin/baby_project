@@ -10,7 +10,7 @@ const UserViewContainer: React.FC = () => {
     const posts = useAppSelector(state => state.user.posts)
     const isEdited = useAppSelector(state => state.post.isEdited)
     const userInfo = useAppSelector(state => state.user)
-
+    // Флаг для изменения статуса
     const [isEdit, updateIsEdit] = useState(false);
 
     const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ const UserViewContainer: React.FC = () => {
 
     useEffect(() => {
         dispatch(fetchUser(paramUserId.userId));
-    }, [dispatch, paramUserId.userId])
+    }, [dispatch, paramUserId.userId, isEdited])
 
     const subscribe = (userId: string | null) => {
         dispatch(subscribed(userId))

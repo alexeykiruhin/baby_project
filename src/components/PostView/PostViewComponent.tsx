@@ -26,8 +26,8 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
 
     const handleSetIsEdited = () => {
         console.log(`POST ID - ${post?.id}`)
-        dispatch(setIsEdited(!isEdited))
         dispatch(setPostId(post?.id))
+        dispatch(setIsEdited(!isEdited))
     }
 
     // Удаление поста
@@ -52,7 +52,7 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
         <>
             {isEdited
                 ? <EditPostWithRedirect/>
-                : <Card title={<NavLink to={'/rating'}>{post?.subject}</NavLink>}
+                : <Card title={<NavLink to={'/post/'+ post?.id}>{post?.subject}</NavLink>}
                         extra={<><NavLink to={`/user/${post?.author.id}`}>
                             {isMe && width === 200 // кастыль с шириной
                                 ? <SettingOutlined onClick={handleSetIsEdited}/>// тут передавать айди
@@ -72,7 +72,7 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
                                 width={width}
                                 src={url}
                             />
-                            <Divider/>
+                            <Divider style={{color: '#000'}}/>
                         </>
                     }
 
