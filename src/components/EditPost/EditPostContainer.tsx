@@ -8,16 +8,18 @@ import {UploadFile} from 'antd/es/upload/interface';
 
 
 const EditPostContainer: React.FC = () => {
+    // Контейнер для редактирования поста
+
     const dispatch = useAppDispatch()
     const postId = useAppSelector(state => state.post.postId)
     // const post = useAppSelector(state => {
     //     return state.user.posts.filter((post) => post.id === postId)
     // })[0]
     const post = useAppSelector(state => state.post.post)
+    // Флаг для отображения списка постов или редактора поста
     const isEdited = useAppSelector(state => state.post.isEdited)
 
-
-
+    // Файлы прикрепленные к посту
     const fileList: UploadFile[] = [
         {
             uid: '-1',
@@ -34,10 +36,12 @@ const EditPostContainer: React.FC = () => {
         console.log('deispatch postId == undefined', postId)
         if (postId !== undefined) {
             console.log('deispatch postId !== undefined', postId)
+            // получаем пост
             dispatch(getPost({postId}))
         }
     }, [dispatch, postId, isEdited])
 
+    // переменные для тегов и файлов
     let tags = ''
     let file = ''
 
@@ -73,15 +77,15 @@ const EditPostContainer: React.FC = () => {
 
     return (
         <>
-        {post?.id === '' && <div>LOLO</div>}
-        {post !== undefined && post?.id !== '' && <EditPostComponent
-            post={post}
-            onUpload={onUpload}
-            onFinish={onFinish}
-            onCancel={onCancel}
-            fileList={fileList}
-            setTags={setTags}
-        />}
+            {post?.id === '' && <div>LOLO</div>}
+            {post !== undefined && post?.id !== '' && <EditPostComponent
+                post={post}
+                onUpload={onUpload}
+                onFinish={onFinish}
+                onCancel={onCancel}
+                fileList={fileList}
+                setTags={setTags}
+            />}
         </>
     )
 }
