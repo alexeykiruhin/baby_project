@@ -8,7 +8,7 @@ const PostListContainer: React.FC = () => {
     const posts = useAppSelector(state => state.home.posts)
     const dispatch = useAppDispatch();
     useEffect(() => {
-        axios.get('https://flask-hello-world-alexeykiruhins-projects.vercel.app', {
+        axios.get('/', {
                     withCredentials: true,
                     // headers: {'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`}
                 }).then((response) => {
