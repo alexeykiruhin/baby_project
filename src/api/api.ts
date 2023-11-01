@@ -1,8 +1,8 @@
 import axios, {AxiosInstance} from 'axios';
 import {PostDataType, returnFinishReg, sendScoreType} from '../types/types';
 
-export const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
-// export const BASE_URL: 'https://0.0.0.0:5000/api/' = 'https://0.0.0.0:5000/api/';
+// export const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
+export const BASE_URL: 'http://45.142.36.60:5000/api/' = 'http://45.142.36.60:5000/api/';
 
 // Добавляем заголовки в запросы на сервер
 const instance: AxiosInstance = axios.create({

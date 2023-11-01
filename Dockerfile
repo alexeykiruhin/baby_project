@@ -2,10 +2,13 @@ FROM node:18-alpine
 
 WORKDIR /client
 
-COPY package.json /client
 
+# Копируем зависимости и устанавливаем их
+COPY package*.json ./
 RUN npm install
 
-COPY . /client/
+
+# Копируем файлы вашего приложения
+COPY . .
 
 CMD ["npm", "start"]
