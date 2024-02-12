@@ -1,9 +1,9 @@
 import axios, {AxiosInstance} from 'axios';
 import {PostDataType, returnFinishReg, sendScoreType} from '../types/types';
 
-// export const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
+export const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
 // export const BASE_URL: 'https://45.142.36.60:5000/api/' = 'https://45.142.36.60:5000/api/';
-export const BASE_URL: 'https://trendtide.ru/api/' = 'https://trendtide.ru/api/';
+// export const BASE_URL: 'https://trendtide.ru/api/' = 'https://trendtide.ru/api/';
 
 // Добавляем заголовки в запросы на сервер
 const instance: AxiosInstance = axios.create({

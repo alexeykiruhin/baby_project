@@ -8,13 +8,13 @@ const PostListContainer: React.FC = () => {
     const posts = useAppSelector(state => state.home.posts)
     const dispatch = useAppDispatch();
     useEffect(() => {
-        axios.get('/', {
-                    withCredentials: true,
-                    // headers: {'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`}
-                }).then((response) => {
-                    console.log('api/time', response.data);
-                    return response.data
-                })
+        // axios.get('/', {
+        //             withCredentials: true,
+        //             // headers: {'Authorization': `Bearer ${localStorage.getItem('refresh_token')}`}
+        //         }).then((response) => {
+        //             console.log('api/time', response.data);
+        //             return response.data
+        //         })
         dispatch(fetchPosts());
     }, [dispatch])
 
