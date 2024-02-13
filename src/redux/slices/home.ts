@@ -85,10 +85,11 @@ const homeSlice = createSlice({
                 })
                 // console.log(postIndex)
                 // обновляем найденный пост
-                const updatedPost = {
+                const updatedPost: HomePostType = {
                     ...state.posts[postIndex],
                     rating: action.payload.new_rating.result
                 };
+                console.log('updatedPost', updatedPost)
                 // обновляем массив постов по частям
                 const updatedPosts = [
                     ...state.posts.slice(0, postIndex),
@@ -96,6 +97,7 @@ const homeSlice = createSlice({
                     ...state.posts.slice(postIndex + 1)
                 ];
                 state.posts = updatedPosts
+                console.log('state.posts', state.posts)
             })
     },
 });

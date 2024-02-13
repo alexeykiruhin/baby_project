@@ -31,7 +31,7 @@ const UserViewContainer: React.FC = () => {
 
     const editStatus = (text: string | null) => {
         // dispatch()
-        console.log('STSTUS')
+        console.log('STATUS')
         updateIsEdit(false)
         const uid = paramUserId.userId
         dispatch(editStatusText({uid, text}))

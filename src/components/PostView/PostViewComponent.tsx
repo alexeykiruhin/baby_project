@@ -21,7 +21,7 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
             score: 1
         }
         dispatch(changeRatingPost(ratingData));
-        dispatch(changeUserRatingPost(ratingData));
+        // dispatch(changeUserRatingPost(ratingData));
     }
 
     const handleSetIsEdited = () => {
@@ -33,7 +33,7 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
     // Удаление поста
     const handleDelete = () => {
         if (post?.id !== undefined) {
-            console.log('post?.id',post?.id)
+            console.log('post?.id', post?.id)
             dispatch(delPost(post?.id))
             dispatch(editPostList(post?.id))
         }
@@ -45,24 +45,29 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
             score: 0
         }
         dispatch(changeRatingPost(ratingData));
-        dispatch(changeUserRatingPost(ratingData));
+        // dispatch(changeUserRatingPost(ratingData));
     }
     const url = 'http://127.0.0.1:5000/api/image/' + post?.img
     return (
         <>
             {isEdited
                 ? <EditPostWithRedirect/>
-                : <Card title={<NavLink to={'/post/'+ post?.id}>{post?.subject}</NavLink>}
-                        extra={<><NavLink to={`/user/${post?.author.id}`}>
-                            {isMe && width === 200 // кастыль с шириной
-                                ? <SettingOutlined onClick={handleSetIsEdited}/>// тут передавать айди
-                                : <><Avatar src={post?.author.img}/><span> {post?.author.username}</span></>}
-                            {/*<Avatar src={post?.author.img}/><span> {post?.author.username}</span>*/}
-                        </NavLink>
-                            {isMe && width === 200 && <NavLink to={`/user/${post?.author.id}`}>
-                                <DeleteOutlined style={{marginLeft: '10px'}} onClick={handleDelete}/>
-                            </NavLink>}
-                        </>}
+                : <Card title={<NavLink to={'/post/' + post?.id}>{post?.subject}</NavLink>}
+                        extra={
+                            post && post.author && post.author.id
+                                ? ( // проверка на существование post без нее получаю ошибку
+                                    <>
+                                        <NavLink to={`/user/${post?.author.id}`}>
+                                            {isMe && width === 200 // костыль с шириной
+                                                ? <SettingOutlined onClick={handleSetIsEdited}/>// тут передавать айди
+                                                : <><Avatar
+                                                    src={post?.author.img}/><span> {post?.author.username}</span></>}
+                                        </NavLink>
+                                        {isMe && width === 200 && <NavLink to={`/user/${post?.author.id}`}>
+                                            <DeleteOutlined style={{marginLeft: '10px'}} onClick={handleDelete}/>
+                                        </NavLink>}
+                                    </>)
+                                : null}
                         headStyle={{textAlign: 'left'}}
                         style={{maxWidth: '660px'}}
                 >
