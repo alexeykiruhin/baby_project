@@ -50,7 +50,7 @@ const UserViewContainer: React.FC = () => {
         isEdited={isEdited}
     />
 }
-const UserViewCWithRedirect = withAuthRedirect(UserViewContainer)
+const UserViewWithRedirect = withAuthRedirect(UserViewContainer)
 
-export default UserViewCWithRedirect;
+export default UserViewWithRedirect;
 // export default UserViewContainer;

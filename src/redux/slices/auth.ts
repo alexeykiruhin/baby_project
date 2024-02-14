@@ -106,10 +106,11 @@ const authSlice = createSlice({
                 state.subscribers = action.payload.user_obj.subscribers;
                 state.access_token = action.payload.access_token;
             })
-        // .addCase(checkAuth.rejected, (state, action) => {
-        //     state.status = 'failed';
-        //     state.error = action.error.message;
-        // })
+            .addCase(checkAuth.rejected, (state, action) => {
+                state.status = 'failed';
+                // state.error = action.error.message;
+                state.isAuth = false;
+            })
         // Обработка login
         builder
             .addCase(login.pending, (state) => {
