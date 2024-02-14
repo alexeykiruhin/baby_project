@@ -43,7 +43,7 @@ const CreatePostComponent: React.FC<CreatePostType> = ({onFinish, onUpload, setT
                     name="Subject"
                     rules={[{required: true, message: 'Please input Subject'}]}
                 >
-                    <Input placeholder="Subject" maxLength={30}/>
+                    <Input placeholder="Subject" maxLength={50}/>
                 </Form.Item>
                 <Form.Item
                     name="Text"

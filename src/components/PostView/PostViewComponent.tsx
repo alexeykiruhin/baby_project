@@ -3,7 +3,7 @@ import {Avatar, Card, Divider, Progress, Image} from 'antd';
 import {PostProps, sendScoreType} from '../../types/types';
 import {NavLink} from 'react-router-dom';
 import TagsViewComponent from '../TagsView/TagsViewComponent';
-import {DeleteOutlined, DislikeOutlined, LikeOutlined, SettingOutlined} from '@ant-design/icons';
+import {CommentOutlined, DeleteOutlined, DislikeOutlined, LikeOutlined, SettingOutlined} from '@ant-design/icons';
 import {changeRatingPost} from '../../redux/slices/home';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {changeUserRatingPost, editPostList} from '../../redux/slices/user';
@@ -71,6 +71,7 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
                         headStyle={{textAlign: 'left'}}
                         style={{maxWidth: '660px'}}
                 >
+                    {/*вставляем картинку если она есть у поста*/}
                     {post?.img &&
                         <>
                             <Image
@@ -81,8 +82,15 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
                         </>
                     }
 
+                    {/*текст поста*/}
                     <p style={{marginBottom: '25px'}}>{post?.text}</p>
 
+                    {/*иконка комментариев*/}
+                    <CommentOutlined
+                        style={{fontSize: '16px', cursor: 'pointer', marginLeft: '296px'}} // костыль на отступ
+                    />
+
+                    {/*блок лайков и дизлайков*/}
                     <Divider/>
                     <div style={{display: 'flex', justifyContent: 'center'}}>
                         <LikeOutlined
@@ -121,7 +129,8 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
                         />
                     </div>
                     <Divider/>
-                    {/*<br/>*/}
+
+                    {/*компонент тегов*/}
                     <TagsViewComponent key={index} index={index} post={post}/>
                 </Card>
             }

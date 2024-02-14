@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SinglePostView: React.FC = () => {
+const SinglePostViewComponent: React.FC = () => {
 
     return (
         <>
@@ -9,4 +9,4 @@ const SinglePostView: React.FC = () => {
     )
 }
 
-export default SinglePostView
+export default SinglePostViewComponent
