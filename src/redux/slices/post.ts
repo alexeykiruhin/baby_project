@@ -22,7 +22,7 @@ const initialState = {
     postId: '',
     post: {
         author: {
-            id: 0,// проверить должна быть строка
+            id: '',// проверить должна быть строка
             img: '',
             username: ''
         },

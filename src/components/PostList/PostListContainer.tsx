@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {fetchPosts} from '../../redux/slices/home';
 import PostListComponent from './PostListComponent';
-import axios from 'axios';
 
 const PostListContainer: React.FC = () => {
     const posts = useAppSelector(state => state.home.posts)
     const dispatch = useAppDispatch();
+    const flagSettings: string = 'view'
     useEffect(() => {
         // axios.get('/', {
         //             withCredentials: true,
@@ -18,7 +18,7 @@ const PostListContainer: React.FC = () => {
         dispatch(fetchPosts());
     }, [dispatch])
 
-    return <PostListComponent items={posts} width={600}/>
+    return <PostListComponent items={posts} flagSettings={flagSettings}/>
 }
 
 export default PostListContainer;

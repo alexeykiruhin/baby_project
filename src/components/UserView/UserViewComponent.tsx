@@ -44,6 +44,8 @@ const UserViewComponent: React.FC<
                           }) => {
 
 
+    const flagSettings : string = 'settings'
+
     return (
         <Row style={{marginLeft: '-12px', marginRight: '-12px'}}>
             <Col md={{span: 24}} lg={{span: 7}} style={{padding: '0 12px'}}>
@@ -101,7 +103,7 @@ const UserViewComponent: React.FC<
                 <Card style={{padding: '24px', textAlign: 'center', borderRadius: '2px'}}>
                     {isEdited
                         ? <EditPostWithRedirect/>
-                        : <PostListComponent items={items} width={200}/>
+                        : <PostListComponent items={items} flagSettings={flagSettings}/>
                     }
                 </Card>
             </Col>

@@ -1,9 +1,8 @@
 import React from 'react';
-import {SelectProps} from 'antd';
 import {UploadFile} from 'antd/es/upload/interface';
 
 export interface AuthorType {
-    id: number;
+    id: string;
     img: string;
     username: string;
 }
@@ -15,7 +14,7 @@ export interface RatingType {
 export interface TagType {
     tag_name: string;
 }
-
+//интерфейс для поста на главной странице
 export interface HomePostType {
     author: AuthorType
     id: string
@@ -29,7 +28,7 @@ export interface HomePostType {
 export type PostProps = {
     index?: number
     post: HomePostType | undefined
-    width?: number
+    flagSettings?: string
 }
 
 export type LoginPass = {
@@ -39,7 +38,7 @@ export type LoginPass = {
 
 export type PostListComponentPropsType = {
     items: Array<HomePostType>
-    width?: number
+    flagSettings?: string
 }
 
 // User
@@ -125,4 +124,42 @@ export type EditPostComponentType = {
     // options: SelectProps['options']
     fileList: UploadFile[]
     // setTags?: (values: any) => void
+}
+
+//Comment
+
+//интерфейс для данных комментария при создании его
+export type CommentDataType = {
+    post_id: string | undefined
+    text: string
+    file?: string | null // Поле "файл" может быть строкой или null, если файл отсутствует
+};
+
+export type CreateCommentType = {
+    onFinish: (values: any) => void
+    onUpload: (values: any) => void
+    setTags?: (values: any) => void
+    AddComment: (values: boolean) => void
+}
+
+//интерфейс для комментария
+export interface CommentType {
+    author: AuthorType
+    id: string
+    // rating: RatingType
+    // tags: TagType[]
+    text: string
+    img?: string
+}
+
+// пропсы для отображения комментариев
+export type CommentsProps = {
+    index?: number
+    comment: CommentType | undefined
+    flagSettings?: string
+}
+
+// Post ID
+export type PostIdType = {
+    postId?: string | undefined
 }

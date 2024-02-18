@@ -1,0 +1,13 @@
+.CreateComment {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.createCommentForm {
+    min-width: 660px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

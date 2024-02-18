@@ -11,7 +11,7 @@ import {delPost, setIsEdited, setPostId} from '../../redux/slices/post';
 import EditPostWithRedirect from '../EditPost/EditPostContainer';
 
 
-const PostViewComponent = ({index, post, width}: PostProps) => {
+const PostViewComponent = ({post, flagSettings}: PostProps) => {
     const dispatch = useAppDispatch();
     const isMe = useAppSelector(state => state.user.isMe)
     const isEdited = useAppSelector(state => state.post.isEdited)
@@ -58,14 +58,17 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
                                 ? ( // проверка на существование post без нее получаю ошибку
                                     <>
                                         <NavLink to={`/user/${post?.author.id}`}>
-                                            {isMe && width === 200 // костыль с шириной
-                                                ? <SettingOutlined onClick={handleSetIsEdited}/>// тут передавать айди
-                                                : <><Avatar
-                                                    src={post?.author.img}/><span> {post?.author.username}</span></>}
+                                            {isMe && flagSettings === 'settings' // костыль с шириной
+                                                ? <>
+                                                    <SettingOutlined onClick={handleSetIsEdited}/>
+                                                    <DeleteOutlined style={{marginLeft: '10px'}} onClick={handleDelete}/>
+                                                </>
+                                                : <>
+                                                    <Avatar src={post?.author.img}/>
+                                                    <span> {post?.author.username}</span>
+                                                </>
+                                            }
                                         </NavLink>
-                                        {isMe && width === 200 && <NavLink to={`/user/${post?.author.id}`}>
-                                            <DeleteOutlined style={{marginLeft: '10px'}} onClick={handleDelete}/>
-                                        </NavLink>}
                                     </>)
                                 : null}
                         headStyle={{textAlign: 'left'}}
@@ -75,7 +78,7 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
                     {post?.img &&
                         <>
                             <Image
-                                width={width}
+                                width={600} // ширина изображения в посте
                                 src={url}
                             />
                             <Divider style={{color: '#000'}}/>
@@ -131,7 +134,7 @@ const PostViewComponent = ({index, post, width}: PostProps) => {
                     <Divider/>
 
                     {/*компонент тегов*/}
-                    <TagsViewComponent key={index} index={index} post={post}/>
+                    <TagsViewComponent post={post}/>
                 </Card>
             }
         </>
