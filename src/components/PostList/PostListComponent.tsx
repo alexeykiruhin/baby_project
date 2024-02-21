@@ -8,7 +8,7 @@ const PostListComponent: React.FC<PostListComponentPropsType> = ({items, flagSet
     return (
         <Space direction="vertical" size="middle" style={{display: 'flex'}}>
             {items.map((item, index) => <PostViewComponent
-                key={index} index={index} post={item} flagSettings={flagSettings}/>)}
+                key={index} index={index} post={item} flagSettings={flagSettings} flagView={'list'}/>)}
             <FloatButton.BackTop visibilityHeight={300}/>
         </Space>
     )

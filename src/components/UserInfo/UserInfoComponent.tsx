@@ -31,7 +31,7 @@ const UserInfoComponent: React.FC = () => {
             {
                 isAuth
                     ? <>
-                        <Avatar src={img} size="large"></Avatar>
+                        <Avatar src={img} size="large" shape="square"></Avatar>
                         <NavLink to={`/user/${id}`}>
                             <Button
                                 size="small"

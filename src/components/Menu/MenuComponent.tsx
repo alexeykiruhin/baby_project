@@ -11,18 +11,21 @@ const MenuComponent: React.FC = () => {
                 <NavLink className={'item'} to="/">Posts</NavLink>
             ),
             key: 0,
+            style: {borderRadius: '8px'}
         },
         {
             label: (
                 <NavLink className={'item'} to="/rating">Rating</NavLink>
             ),
             key: 1,
+            style: {borderRadius: '8px'}
         },
         {
             label: (
                 <NavLink className={'item'} to="/create">Create</NavLink>
             ),
             key: 2,
+            style: {borderRadius: '8px'}
         },
     ];
 

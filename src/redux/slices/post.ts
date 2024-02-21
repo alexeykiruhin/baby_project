@@ -24,7 +24,8 @@ const initialState = {
         author: {
             id: '',// проверить должна быть строка
             img: '',
-            username: ''
+            username: '',
+            statusText: ''
         },
         id: '',
         rating: {result: 0},

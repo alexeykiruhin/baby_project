@@ -2,9 +2,10 @@ import React from 'react';
 import {UploadFile} from 'antd/es/upload/interface';
 
 export interface AuthorType {
-    id: string;
-    img: string;
-    username: string;
+    id: string
+    img: string
+    username: string
+    statusText: string
 }
 
 export interface RatingType {
@@ -29,6 +30,7 @@ export type PostProps = {
     index?: number
     post: HomePostType | undefined
     flagSettings?: string
+    flagView?: 'single' | 'list'
 }
 
 export type LoginPass = {

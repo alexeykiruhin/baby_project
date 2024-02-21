@@ -31,7 +31,7 @@ const SinglePostViewContainer: React.FC = () => {
             >
                 {/*попробовать заменить Space на обычный див и его настроить так как надо*/}
                 {/*есть отступ сверху, можно его чем то заполнить*/}
-                <PostViewComponent post={post}/>
+                <PostViewComponent post={post} flagView={'single'}/>
                 <Title level={2} style={{textAlign: 'center', marginBottom: '0.83em'}} ref={commentsRef}>Comments</Title>
                 <CommentsContainer postId={paramPostId.postId}/>
             </div>

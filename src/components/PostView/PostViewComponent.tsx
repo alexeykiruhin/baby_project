@@ -1,5 +1,5 @@
 import React from 'react'
-import {Avatar, Card, Divider, Progress, Image} from 'antd';
+import {Avatar, Card, Divider, Progress, Image, Flex, Popover} from 'antd';
 import {PostProps, sendScoreType} from '../../types/types';
 import {NavLink} from 'react-router-dom';
 import TagsViewComponent from '../TagsView/TagsViewComponent';
@@ -11,10 +11,14 @@ import {delPost, setIsEdited, setPostId} from '../../redux/slices/post';
 import EditPostWithRedirect from '../EditPost/EditPostContainer';
 
 
-const PostViewComponent = ({post, flagSettings}: PostProps) => {
+const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
     const dispatch = useAppDispatch();
     const isMe = useAppSelector(state => state.user.isMe)
     const isEdited = useAppSelector(state => state.post.isEdited)
+    let widthImg: number = 200
+    if (flagView === 'single') {
+        widthImg = 600
+    }
     const sendScorePlus = () => {
         const ratingData: sendScoreType = {
             postId: post?.id,
@@ -48,6 +52,14 @@ const PostViewComponent = ({post, flagSettings}: PostProps) => {
         // dispatch(changeUserRatingPost(ratingData));
     }
     const url = 'http://127.0.0.1:5000/api/image/' + post?.img
+
+    const content = (
+        <div>
+            <p>Name - {post?.author.username}</p>
+            <p>Status - {post?.author.statusText}</p>
+        </div>
+    );
+
     return (
         <>
             {isEdited
@@ -64,8 +76,10 @@ const PostViewComponent = ({post, flagSettings}: PostProps) => {
                                                     <DeleteOutlined style={{marginLeft: '10px'}} onClick={handleDelete}/>
                                                 </>
                                                 : <>
-                                                    <Avatar src={post?.author.img}/>
-                                                    <span> {post?.author.username}</span>
+                                                    <Popover content={content}>
+                                                        <Avatar src={post?.author.img} shape="square"/>
+                                                    </Popover>
+                                                    {/*<span> {post?.author.username}</span>*/}
                                                 </>
                                             }
                                         </NavLink>
@@ -76,17 +90,21 @@ const PostViewComponent = ({post, flagSettings}: PostProps) => {
                 >
                     {/*вставляем картинку если она есть у поста*/}
                     {post?.img &&
-                        <>
+                        <Flex vertical={true} align={'center'}>
                             <Image
-                                width={600} // ширина изображения в посте
+                                style={{alignItems: 'center'}}
+                                width={widthImg} // ширина изображения в посте
                                 src={url}
                             />
                             <Divider style={{color: '#000'}}/>
-                        </>
+                        </Flex>
                     }
 
                     {/*текст поста*/}
-                    <p style={{marginBottom: '25px'}}>{post?.text}</p>
+                    <p style={{marginBottom: '25px'}}>
+                        {/*//сокращаем текст до 200 знаков*/}
+                        {post?.text.substring(0, 199)}{'...'}
+                    </p>
 
                     {/*иконка комментариев*/}
                     <CommentOutlined
