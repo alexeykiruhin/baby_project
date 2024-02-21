@@ -8,10 +8,18 @@ import {CreateCommentType} from "../../types/types";
 
 const {TextArea} = Input;
 
-const CreateCommentForm: React.FC<CreateCommentType>  = ({onFinish, onUpload, AddComment})=> {
+const CreateCommentForm: React.FC<CreateCommentType> = ({onFinish, onUpload, AddComment}) => {
+    const [form] = Form.useForm();
 
     const handleCancelComment = () => {
         AddComment(false)
+    }
+
+    const sendCommentText = (obj: { Text: string }) => {
+        let text = obj.Text;
+        onFinish(text);
+        // очистка поля ввода комментария
+        form.resetFields()
     }
 
     return (
@@ -21,10 +29,11 @@ const CreateCommentForm: React.FC<CreateCommentType>  = ({onFinish, onUpload, Ad
                 Add comment
             </Title>
             <Form
+                form={form}
                 name="basic"
                 className={styles.createCommentForm}
-                initialValues={{File: ''}}
-                onFinish={onFinish}
+                initialValues={{File: '', Text: ''}}
+                onFinish={sendCommentText}
                 autoComplete="off"
             >
                 <Form.Item

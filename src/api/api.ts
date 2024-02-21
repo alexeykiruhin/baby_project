@@ -178,7 +178,7 @@ export const API = {
             return response.data;
         },
         // получить комментарии к посту по айди поста
-        async getCommentsById(postId: string | undefined) {
+        async getCommentsByPostId(postId: string | undefined) {
             const response = await instance.get(`comments/${postId}`);
             console.log('data', response.data)
             return response.data;

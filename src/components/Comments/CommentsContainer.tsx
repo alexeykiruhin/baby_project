@@ -4,8 +4,8 @@ import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {Button} from "antd";
 import CreateCommentForm from "./CreateCommentForm";
 import {CommentDataType, PostIdType} from "../../types/types";
-import {createComment} from "../../redux/slices/comment";
-import {getCommentsById} from "../../redux/slices/comments";
+import {createComment} from "../../redux/slices/comments";
+import {getCommentsByPostId} from "../../redux/slices/comments";
 
 const CommentsContainer: React.FC<PostIdType> = (postId) => {
     const comments = useAppSelector((state) => state.comments.comments)
@@ -15,7 +15,7 @@ const CommentsContainer: React.FC<PostIdType> = (postId) => {
 
 
     useEffect(() => {
-        dispatch(getCommentsById(postId))
+        dispatch(getCommentsByPostId(postId))
     }, [dispatch, postId]);
 
     const handleCreateComment = () => {
@@ -26,7 +26,7 @@ const CommentsContainer: React.FC<PostIdType> = (postId) => {
     const onFinish = (values: any) => {
         const commentData: CommentDataType = {
             post_id: postId.postId,
-            text: values.Text,
+            text: values,
             file: file,
         }
         dispatch(createComment(commentData))
@@ -40,7 +40,7 @@ const CommentsContainer: React.FC<PostIdType> = (postId) => {
     console.log(comments)
 
     return <>
-        {comments.map((comment, index) => <CommentsComponent comment={comment}/>)}
+        {comments ? comments.map((comment, index) => <CommentsComponent comment={comment}/>) : null}
         {isAddComment && <CreateCommentForm onFinish={onFinish} onUpload={onUpload} AddComment={AddComment}/>}
         {!isAddComment && <Button
             block
