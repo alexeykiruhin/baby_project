@@ -14,6 +14,7 @@ export interface userType {
     minus: number,
     subscribers: number,
     isSubs: boolean,
+    currentPost: string,
     posts: Array<HomePostType>,
     status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: any
@@ -32,6 +33,7 @@ const initialState = {
     minus: 0,
     subscribers: 0,
     isSubs: false,
+    currentPost: '',
     posts: [],
     status: 'idle', // 'idle', 'loading', 'succeeded', 'failed'
     error: null,
@@ -97,6 +99,10 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        // Добавляем редьюсер для изменения currentPost
+        setPostId: (state, action) => {
+            state.currentPost = action.payload;
+        },
         // Добавляем редьюсер для изменения постов после удаления
         editPostList: (state, action) => {
             // state.posts = action.payload;
@@ -197,7 +203,7 @@ const userSlice = createSlice({
 
 // Слайс генерирует действия, которые экспортируются отдельно
 // Действия генерируются автоматически из имен ключей редьюсеров
-export const {editPostList} = userSlice.actions;
+export const {editPostList, setPostId} = userSlice.actions;
 
 // По умолчанию экспортируется редьюсер, сгенерированный слайсом
 export default userSlice.reducer;

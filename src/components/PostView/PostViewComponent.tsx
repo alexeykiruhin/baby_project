@@ -6,8 +6,8 @@ import TagsViewComponent from '../TagsView/TagsViewComponent';
 import {CommentOutlined, DeleteOutlined, DislikeOutlined, LikeOutlined, SettingOutlined} from '@ant-design/icons';
 import {changeRatingPost} from '../../redux/slices/home';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {editPostList} from '../../redux/slices/user';
-import {delPost, setIsEdited, setPostId} from '../../redux/slices/post';
+import {editPostList, setPostId} from '../../redux/slices/user';
+import {delPost, setIsEdited} from '../../redux/slices/post';
 import EditPostWithRedirect from '../EditPost/EditPostContainer';
 
 
