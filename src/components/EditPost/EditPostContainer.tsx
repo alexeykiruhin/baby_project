@@ -2,9 +2,10 @@ import React, {useEffect} from 'react';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import EditPostComponent from './EditPostComponent';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {editPost, getPost, getTags, setIsEdited} from '../../redux/slices/post';
-import {PostDataType} from '../../types/types';
+import {getPost, getTags, setIsEdited} from '../../redux/slices/post';
+import {AuthorType, HomePostType, PostDataType, RatingType, TagType} from '../../types/types';
 import {UploadFile} from 'antd/es/upload/interface';
+import {editPost} from "../../redux/slices/user";
 
 
 const EditPostContainer: React.FC = () => {
@@ -51,23 +52,28 @@ const EditPostContainer: React.FC = () => {
     };
     // Устанока новых тегов
     const setTags = (value: string) => {
+        console.log('settags', value)
         tags = value
     }
 
     // Отправка изменений
     const onFinish = (value: any) => {
+        if (post) {
+            const out: HomePostType = {
+                author: post.author,
+                rating: post.rating,
+                subject: value.subject,
+                text: value.text,
+                img: file || post?.img, // Поле "файл" может быть строкой или null, если файл отсутствует
+                tags: tags || value.tags,
+                id: post?.id
+            }
+            dispatch(editPost(out))
+            dispatch(setIsEdited(false))
+            console.log(`finish - ${value}`)
 
-        const out: PostDataType = {
-            title: value.subject,
-            text: value.text,
-            file: file || post?.img, // Поле "файл" может быть строкой или null, если файл отсутствует
-            tags: tags || value.tags,
-            id: post?.id
+
         }
-
-        dispatch(editPost(out))
-        dispatch(setIsEdited(false))
-        console.log(`finish - ${value}`)
     }
 
     //Отмена изменений

@@ -85,7 +85,8 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
                                         </NavLink>
                                     </>)
                                 : null}
-                        headStyle={{textAlign: 'left'}}
+                        styles={{header: {'textAlign': 'left'}}}
+                        // headStyle={{textAlign: 'left'}}
                         style={{maxWidth: '660px'}}
                 >
                     {/*вставляем картинку если она есть у поста*/}
@@ -103,7 +104,7 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
                     {/*текст поста*/}
                     <p style={{marginBottom: '25px'}}>
                         {/*//сокращаем текст до 200 знаков*/}
-                        {post?.text.substring(0, 199)}{'...'}
+                        {post && post?.text.length > 199 ? post?.text.substring(0, 199) + '...' : post?.text}
                     </p>
 
                     {/*иконка комментариев*/}

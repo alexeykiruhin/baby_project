@@ -37,6 +37,15 @@ const initialState = {
     error: null,
 } as userType
 
+// Редактирование поста
+export const editPost = createAsyncThunk('user/editPost', async (postData: HomePostType) => {
+    try {
+        return await API.Post.editPost(postData)
+    } catch (error) {
+        throw error;
+    }
+});
+
 //Проверка аутентификации
 export const fetchUser = createAsyncThunk('user/fetchUser', async (userId: string | undefined) => {
     try {
@@ -163,6 +172,25 @@ const userSlice = createSlice({
             .addCase(editStatusText.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.statusText = action.payload.statusText
+            })
+        // Редактировать пост
+        builder
+            .addCase(editPost.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                const neWpost = action.payload
+                console.log('edit', neWpost.id)
+
+                const postIndex = state.posts.findIndex((p)=> {
+                    console.log(p.id)
+                    return p.id === neWpost.id
+                })
+                // обновляем массив постов по частям
+                state.posts = [
+                    ...state.posts.slice(0, postIndex),
+                    neWpost,
+                    ...state.posts.slice(postIndex + 1)
+                ]
+                // console.log('postIndex', postIndex)
             })
     },
 });

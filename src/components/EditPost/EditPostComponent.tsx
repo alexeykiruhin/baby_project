@@ -28,7 +28,7 @@ const EditPostComponent: React.FC<PostProps & EditPostComponentType> = ({
         });
     }
 
-    console.log('post', post)
+
     return (
         <>
             <Card title={'Edit post'}
@@ -37,7 +37,7 @@ const EditPostComponent: React.FC<PostProps & EditPostComponentType> = ({
                       <SettingOutlined/>
                       // </NavLink>
                   }
-                  headStyle={{textAlign: 'left'}}
+                  // headStyle={{textAlign: 'left'}} //устарел
                   style={{maxWidth: '660px'}}
             >
                 <Form
@@ -46,7 +46,7 @@ const EditPostComponent: React.FC<PostProps & EditPostComponentType> = ({
                     initialValues={{
                         subject: post?.subject, // Задаем начальное значение для поля Subject
                         text: post?.text,       // Задаем начальное значение для поля Text
-                        tags: [],       // Можете задать начальные значения для Tags, если необходимо
+                        tags: [...post?.tags.map((i)=>i.tag_name) || []],       // Можете задать начальные значения для Tags, если необходимо
                     }}
                     onFinish={onFinish}
                     autoComplete="off"
@@ -66,7 +66,7 @@ const EditPostComponent: React.FC<PostProps & EditPostComponentType> = ({
                     <Form.Item
                         name="tags"
                         rules={[{required: true, message: 'Please input Tags'}]}
-                        initialValue={'sd'}
+                        // initialValue={'sd'}
                     >
                         <Select
                             mode="tags"

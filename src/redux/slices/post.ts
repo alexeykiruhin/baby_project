@@ -45,14 +45,14 @@ export const createPost = createAsyncThunk('post/createPost', async (postData: P
     }
 });
 
-// Редактирование поста
-export const editPost = createAsyncThunk('post/editPost', async (postData: PostDataType) => {
-    try {
-        return await API.Post.editPost(postData)
-    } catch (error) {
-        throw error;
-    }
-});
+// // Редактирование поста
+// export const editPost = createAsyncThunk('post/editPost', async (postData: PostDataType) => {
+//     try {
+//         return await API.Post.editPost(postData)
+//     } catch (error) {
+//         throw error;
+//     }
+// });
 
 // Удаление поста
 export const delPost = createAsyncThunk('post/delPost', async (postId: string) => {
@@ -118,12 +118,12 @@ const postSlice = createSlice({
                 state.status = 'succeeded';
                 state.post = action.payload
             })
-        builder
-            // Редактировать пост
-            .addCase(editPost.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.post = action.payload
-            })
+        // builder
+        //     // Редактировать пост
+        //     .addCase(editPost.fulfilled, (state, action) => {
+        //         state.status = 'succeeded';
+        //         state.post = action.payload
+        //     })
         builder
             // Удалить пост
             .addCase(delPost.fulfilled, (state, action) => {
