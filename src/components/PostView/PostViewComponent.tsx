@@ -1,5 +1,5 @@
 import React from 'react'
-import {Avatar, Card, Divider, Progress, Image, Flex, Popover} from 'antd';
+import {Avatar, Card, Divider, Image, Flex, Popover} from 'antd';
 import {PostProps, sendScoreType} from '../../types/types';
 import {NavLink} from 'react-router-dom';
 import TagsViewComponent from '../TagsView/TagsViewComponent';
@@ -9,6 +9,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {editPostList, setPostId} from '../../redux/slices/user';
 import {delPost, setIsEdited} from '../../redux/slices/post';
 import EditPostWithRedirect from '../EditPost/EditPostContainer';
+import RatingPostViewComponent from "./RatingPostViewComponent";
 
 
 const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
@@ -129,12 +130,13 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
                         />
                     </div>
                     {/*можно прогрессбар вынести в отдельный компонент*/}
+                    {post && <RatingPostViewComponent result={post.rating.result}/>}
 
-                    {post?.rating?.result !== undefined && <>
-                        {post.rating?.result >= 0 && <Progress strokeLinecap="butt" percent={post?.rating.result}/>}
-                        {post.rating?.result < 0 && <Progress strokeLinecap="butt" strokeColor={'red'}
-                                                              percent={-1 * post?.rating.result}/>}
-                    </>}
+                    {/*{post?.rating?.result !== undefined && <>*/}
+                    {/*    {post.rating?.result >= 0 && <Progress strokeLinecap="butt" percent={post?.rating.result}/>}*/}
+                    {/*    {post.rating?.result < 0 && <Progress strokeLinecap="butt" strokeColor={'red'}*/}
+                    {/*                                          percent={-1 * post?.rating.result}/>}*/}
+                    {/*</>}*/}
                     {/*<Progress strokeLinecap="butt" percent={post?.rating.result}/>*/}
                     <div style={{display: 'flex', justifyContent: 'center'}}>
                         <DislikeOutlined
