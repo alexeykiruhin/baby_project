@@ -6,7 +6,7 @@ import {Tag} from 'antd';
 const TagsViewComponent = ({post}: PostProps) => {
     return (
         post && post.tags ? (
-            <>
+            <div>
                 {post?.tags.map((tag: TagType, index: number) => {
                     return (
                         <NavLink key={index} to={'/rating'}>
@@ -16,7 +16,7 @@ const TagsViewComponent = ({post}: PostProps) => {
                         </NavLink>
                     )
                 })}
-            </>
+            </div>
         ) : null
     )
 }

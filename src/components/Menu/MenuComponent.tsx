@@ -1,10 +1,27 @@
 import React from 'react';
 import {Menu, MenuProps} from "antd";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 // import styles from './Menu.module.css';
 
 const MenuComponent: React.FC = () => {
-
+    let location = useLocation()
+    console.log('MENU _ ', location.pathname)
+    const loc = ['/', '/rating', '/create']
+    let x: string[] = []
+    switch (location.pathname) {
+        case loc[0]: {
+            x = ['0']
+            break
+        }
+        case loc[1]: {
+            x = ['1']
+            break
+        }
+        case loc[2]: {
+            x = ['2']
+            break
+        }
+    }
     const item: MenuProps['items'] = [
         {
             label: (
@@ -33,7 +50,7 @@ const MenuComponent: React.FC = () => {
         <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={['0']}
+            defaultSelectedKeys={x}
             items={item}
         />
     )

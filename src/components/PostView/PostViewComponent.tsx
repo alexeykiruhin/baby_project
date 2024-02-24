@@ -108,10 +108,6 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
                         {post && post?.text.length > 199 ? post?.text.substring(0, 199) + '...' : post?.text}
                     </p>
 
-                    {/*иконка комментариев*/}
-                    <CommentOutlined
-                        style={{fontSize: '16px', cursor: 'pointer', marginLeft: '296px'}} // костыль на отступ
-                    />
 
                     {/*блок лайков и дизлайков*/}
                     <Divider/>
@@ -153,9 +149,15 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
                         />
                     </div>
                     <Divider/>
+                    <Flex justify={'space-between'}>
+                        {/*компонент тегов*/}
+                        <TagsViewComponent post={post}/>
+                        {/*иконка комментариев*/}
+                        <CommentOutlined
+                            style={{fontSize: '16px', cursor: 'pointer'}} // костыль на отступ
+                        />
+                    </Flex>
 
-                    {/*компонент тегов*/}
-                    <TagsViewComponent post={post}/>
                 </Card>
             }
         </>
