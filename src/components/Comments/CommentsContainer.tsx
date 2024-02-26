@@ -47,7 +47,6 @@ const CommentsContainer: React.FC<PostIdType> = (postId) => {
     }
 
     const saveEditComment = (text: string, id: string) => {
-        console.log('SAVE', text)
         const commentData: CommentDataType = {
             comment_id: id,
             post_id: postId.postId,
