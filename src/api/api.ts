@@ -1,5 +1,5 @@
 import axios, {AxiosInstance} from 'axios';
-import {CommentDataType, HomePostType, PostDataType, returnFinishReg, sendScoreType} from '../types/types';
+import {CommentDataType, CommentType, HomePostType, PostDataType, returnFinishReg, sendScoreType} from '../types/types';
 
 export const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
 // export const BASE_URL: 'https://45.142.36.60:5000/api/' = 'https://45.142.36.60:5000/api/';
@@ -182,6 +182,14 @@ export const API = {
         async getCommentsByPostId(postId: string | undefined) {
             const response = await instance.get(`comments/${postId}`);
             console.log('data', response.data)
+            return response.data;
+        },
+        async editComment(commentData: CommentDataType) {
+            const response = await instance.post(`edit_comment`, {
+                comment_data: commentData
+            })
+
+            console.log('editComment_DATA', response.data)
             return response.data;
         },
 

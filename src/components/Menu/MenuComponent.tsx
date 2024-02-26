@@ -7,7 +7,7 @@ const MenuComponent: React.FC = () => {
     let location = useLocation()
     console.log('MENU _ ', location.pathname)
     const loc = ['/', '/rating', '/create']
-    let x: string[] = []
+    let x: string[] = ['0']
     switch (location.pathname) {
         case loc[0]: {
             x = ['0']

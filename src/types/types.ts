@@ -132,6 +132,7 @@ export type EditPostComponentType = {
 
 //интерфейс для данных комментария при создании его
 export type CommentDataType = {
+    comment_id?: string
     post_id: string | undefined
     text: string
     file?: string | null // Поле "файл" может быть строкой или null, если файл отсутствует
@@ -158,6 +159,9 @@ export interface CommentType {
 export type CommentsProps = {
     index?: number
     comment: CommentType | undefined
+    myUserId?: string
+    handleToggleEdit?: (id: string) => void
+    saveEditComment?: (text: string, id: string) => void
     flagSettings?: string
 }
 
