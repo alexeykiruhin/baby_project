@@ -25,6 +25,15 @@ export const editComment = createAsyncThunk('comments/editComment', async (comme
     }
 });
 
+// Удаление комментария
+export const deleteComment = createAsyncThunk('comments/deleteComment', async (id: string) => {
+    try {
+        return await API.PostComments.deleteComment(id)
+    } catch (error) {
+        throw error;
+    }
+});
+
 // Создание комментария
 export const createComment = createAsyncThunk(
     'comments/createComment',
@@ -75,7 +84,7 @@ const commentsSlice = createSlice({
                 const neWcomment = action.payload
                 console.log('edit', neWcomment.id)
                 let updateComment: CommentType
-                const commentIndex = state.comments.findIndex((c)=> {
+                const commentIndex = state.comments.findIndex((c) => {
                     console.log(c.id)
                     return c.id === neWcomment.id
                 })
@@ -87,6 +96,20 @@ const commentsSlice = createSlice({
                     ...state.comments.slice(commentIndex + 1)
                 ]
                 // console.log('postIndex', postIndex)
+            })
+            .addCase(deleteComment.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                console.log('delete', action.payload)
+                const data = action.payload
+                const commentIndex = state.comments.findIndex((c) => {
+                    console.log(c.id)
+                    return c.id === data.id
+                })
+                // обновляем массив постов по частям
+                state.comments = [
+                    ...state.comments.slice(0, commentIndex),
+                    ...state.comments.slice(commentIndex + 1)
+                ]
             })
     },
 });

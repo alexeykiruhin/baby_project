@@ -162,6 +162,7 @@ export type CommentsProps = {
     myUserId?: string
     handleToggleEdit?: (id: string) => void
     saveEditComment?: (text: string, id: string) => void
+    deleteEditComment?: (id: string) => void
     flagSettings?: string
 }
 

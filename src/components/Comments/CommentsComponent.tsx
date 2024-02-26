@@ -3,7 +3,12 @@ import {Avatar, Card, Button} from 'antd';
 import {CommentsProps} from "../../types/types";
 import {NavLink} from "react-router-dom";
 
-const CommentsComponent: React.FC<CommentsProps> = ({comment, myUserId, handleToggleEdit}) => {
+const CommentsComponent: React.FC<CommentsProps> = ({
+                                                        comment,
+                                                        myUserId,
+                                                        handleToggleEdit,
+                                                        deleteEditComment
+                                                    }) => {
 
     return (
         <>
@@ -15,11 +20,19 @@ const CommentsComponent: React.FC<CommentsProps> = ({comment, myUserId, handleTo
                     </NavLink>
                 }
                 extra={myUserId && myUserId === comment?.author.id
-                    ? <Button
-                        type="link"
-                        style={{width: '65px'}}
-                        onClick={() => handleToggleEdit ? handleToggleEdit(comment?.id) : null}
-                    >Edit</Button>
+                    ? <>
+                        <Button
+                            type="link"
+                            style={{width: '65px'}}
+                            onClick={() => handleToggleEdit ? handleToggleEdit(comment?.id) : null}
+                        >Edit</Button>
+                        <Button
+                            type="link"
+                            style={{width: '65px'}}
+                            danger={true}
+                            onClick={() => deleteEditComment ? deleteEditComment(comment?.id) : null}
+                        >Delete</Button>
+                    </>
                     : <Button
                         type="link"
                         style={{width: '65px'}}

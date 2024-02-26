@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {Button} from "antd";
 import CreateCommentForm from "./CreateCommentForm";
 import {CommentDataType, PostIdType} from "../../types/types";
-import {createComment, editComment} from "../../redux/slices/comments";
+import {createComment, deleteComment, editComment} from "../../redux/slices/comments";
 import {getCommentsByPostId} from "../../redux/slices/comments";
 import EditCommentContainer from "./EditComment/EditCommentContainer";
 
@@ -58,6 +58,11 @@ const CommentsContainer: React.FC<PostIdType> = (postId) => {
         // dispatch(toggleEditComment())
     }
 
+    const deleteEditComment = (id: string) => {
+        console.log('delete', id)
+        dispatch(deleteComment(id))
+    }
+
     return <>
         {comments && myUserId ? comments.map((comment, index) => {
             if (comment.id === isEditComment) {
@@ -74,6 +79,7 @@ const CommentsContainer: React.FC<PostIdType> = (postId) => {
                         comment={comment}
                         myUserId={myUserId}
                         handleToggleEdit={handleToggleEdit}
+                        deleteEditComment={deleteEditComment}
                     />)
             }
         }) : null}

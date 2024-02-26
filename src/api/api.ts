@@ -192,6 +192,12 @@ export const API = {
             console.log('editComment_DATA', response.data)
             return response.data;
         },
+        async deleteComment(id: string) {
+            const response = await instance.post(`del_comment`, {
+                id
+            })
+            return response.data;
+        },
 
     },
     CP: {
