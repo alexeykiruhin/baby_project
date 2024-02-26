@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
 import {Button} from "antd";
 import CreateCommentForm from "./CreateCommentForm";
 import {CommentDataType, PostIdType} from "../../types/types";
-import {createComment, editComment, toggleEditComment} from "../../redux/slices/comments";
+import {createComment, editComment} from "../../redux/slices/comments";
 import {getCommentsByPostId} from "../../redux/slices/comments";
 import EditCommentContainer from "./EditComment/EditCommentContainer";
 

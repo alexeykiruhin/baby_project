@@ -4,8 +4,8 @@ import auth from './auth';
 import rating from './rating';
 import user from './user';
 import post from './post';
-// import comment from "./comment";
 import comments from "./comments";
+import cp from "./cp";
 
 export const store = configureStore({
     reducer: {
@@ -14,8 +14,8 @@ export const store = configureStore({
         rating,
         user,
         post,
-        // comment,
         comments,
+        cp
     }
 })
 

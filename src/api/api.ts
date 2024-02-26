@@ -1,5 +1,5 @@
 import axios, {AxiosInstance} from 'axios';
-import {CommentDataType, CommentType, HomePostType, PostDataType, returnFinishReg, sendScoreType} from '../types/types';
+import {CommentDataType, HomePostType, PostDataType, returnFinishReg, sendScoreType} from '../types/types';
 
 export const BASE_URL: 'http://127.0.0.1:5000/api/' = 'http://127.0.0.1:5000/api/';
 // export const BASE_URL: 'https://45.142.36.60:5000/api/' = 'https://45.142.36.60:5000/api/';
@@ -193,5 +193,13 @@ export const API = {
             return response.data;
         },
 
+    },
+    CP: {
+        // получить комментарии к посту по айди поста
+        async getCP() {
+            const response = await instance.get(`cp`);
+            console.log('CP_data', response.data)
+            return response.data;
+        },
     }
 }

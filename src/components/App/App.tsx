@@ -11,6 +11,7 @@ import RegContainer from '../Reg/RegContainer';
 import CreatePostContainer from '../CreatePost/CreatePostContainer';
 import RatingContainer from '../Rating/RatingContainer';
 import SinglePostViewContainer from '../SinglePostView/SinglePostViewContainer';
+import CPContainer from "../CP/CPContainer";
 
 export const {Content} = Layout;
 
@@ -41,6 +42,9 @@ const App: React.FC = () => {
                         <Route path="/user/:userId" element={<UserViewContainer/>}/>
                         <Route path="/post/:postId" element={<SinglePostViewContainer/>}/>
                         {/*// /!*<Route path="/tag-search" element={<TagSearch/>}/>*!/*/}
+                        {/*__CP__*/}
+                        <Route path="/cp" element={<CPContainer/>}/>
+                        <Route path="/cp/users" element={<CPContainer/>}/>
                     </Routes>
                     {/*</div>*/}
                 </Content>
