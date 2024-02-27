@@ -6,7 +6,7 @@ import {PostListComponentPropsType} from '../../types/types';
 const PostListComponent: React.FC<PostListComponentPropsType> = ({items, flagSettings}) => {
 
     return (
-        <Space direction="vertical" size="middle" style={{display: 'flex'}}>
+        <Space direction="vertical" size="small" style={{display: 'flex', background: 'red'}}>
             {items.map((item, index) => <PostViewComponent
                 key={index} index={index} post={item} flagSettings={flagSettings} flagView={'list'}/>)}
             <FloatButton.BackTop visibilityHeight={300}/>

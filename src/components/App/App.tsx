@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {Layout} from 'antd';
 import HeaderContainer from '../Header/HeaderContainer';
 import FooterComponent from '../Footer/FooterComponent';
-import UserInfoComponent from '../UserInfo/UserInfoComponent';
 import LoginContainer from '../Login/LoginContainer';
 import UserViewContainer from '../UserView/UserViewContainer';
 import RegContainer from '../Reg/RegContainer';
@@ -27,9 +26,9 @@ const App: React.FC = () => {
         <Router>
             <Layout>
                 <HeaderContainer/>
-                <UserInfoComponent/>
+                {/*<UserInfoComponent/>*/}
                 <Content className="site-layout"
-                         style={{padding: '0 50px', minHeight: '81vh'}}>
+                         style={{marginTop: '80px', minHeight: '81vh'}}>
                     {/*<div style={{padding: 24, minHeight: 380}}>*/}
                     {/*, background: colorBgContainer*/}
                     <Routes>
@@ -45,6 +44,7 @@ const App: React.FC = () => {
                         {/*__CP__*/}
                         <Route path="/cp" element={<CPContainer/>}/>
                         <Route path="/cp/users" element={<CPContainer/>}/>
+                        <Route path="/cp/posts" element={<CPContainer/>}/>
                     </Routes>
                     {/*</div>*/}
                 </Content>
