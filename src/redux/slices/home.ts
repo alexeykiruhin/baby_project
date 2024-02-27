@@ -69,7 +69,8 @@ const homeSlice = createSlice({
             })
             .addCase(fetchSubPosts.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.posts = action.payload.posts;
+                console.log('payload', action.payload)
+                state.posts = action.payload;
             })
             .addCase(fetchSubPosts.rejected, (state, action) => {
                 state.status = 'failed';

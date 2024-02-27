@@ -154,7 +154,7 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
                         <TagsViewComponent post={post}/>
                         {/*иконка комментариев*/}
                         <CommentOutlined
-                            style={{fontSize: '16px', cursor: 'pointer'}} // костыль на отступ
+                            style={{fontSize: '22px', cursor: 'pointer', color: '#1677ff'}} // костыль на отступ
                         />
                     </Flex>
 
