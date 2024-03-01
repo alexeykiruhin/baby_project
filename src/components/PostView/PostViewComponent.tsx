@@ -55,6 +55,7 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
         dispatch(changeRatingPost(ratingData));
         // dispatch(changeUserRatingPost(ratingData));
     }
+    //надо импортировать урл
     const url = 'http://127.0.0.1:5000/api/image/' + post?.img
 
     const content = (
