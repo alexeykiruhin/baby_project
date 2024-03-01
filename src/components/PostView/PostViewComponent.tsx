@@ -30,9 +30,12 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
     }
 
     const handleSetIsEdited = () => {
-        console.log(`POST ID - ${post?.id}`)
-        dispatch(setPostId(post?.id))
-        dispatch(setIsEdited(!isEdited))
+        console.log(`POST ID - ${post?.rating.result}`)
+        // вывести оповещение о том что у поста рейтинг уже не ноль и его нельзя редактировать
+        if (post?.rating.result === 0){
+            dispatch(setPostId(post?.id))
+            dispatch(setIsEdited(!isEdited))
+        }
     }
 
     // Удаление поста
@@ -71,7 +74,8 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
                                 ? ( // проверка на существование post без нее получаю ошибку
                                     <>
                                         <NavLink to={`/user/${post?.author.id}`}>
-                                            {isMe && flagSettings === 'settings' // костыль с шириной
+                                            {isMe && flagSettings === 'settings' && post.rating.result === 0
+                                                // проверка мои ли посты, флаг сеттингс и нулевой рейтинг
                                                 ? <>
                                                     <SettingOutlined onClick={handleSetIsEdited}/>
                                                     <DeleteOutlined style={{marginLeft: '10px'}} onClick={handleDelete}/>
@@ -87,7 +91,7 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
                                     </>)
                                 : null}
                         styles={{header: {'textAlign': 'left'}}}
-                        // headStyle={{textAlign: 'left'}}
+                    // headStyle={{textAlign: 'left'}}
                         style={{maxWidth: '660px'}}
                 >
                     {/*вставляем картинку если она есть у поста*/}
@@ -128,12 +132,6 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
                     {/*можно прогрессбар вынести в отдельный компонент*/}
                     {post && <RatingPostViewComponent result={post.rating.result}/>}
 
-                    {/*{post?.rating?.result !== undefined && <>*/}
-                    {/*    {post.rating?.result >= 0 && <Progress strokeLinecap="butt" percent={post?.rating.result}/>}*/}
-                    {/*    {post.rating?.result < 0 && <Progress strokeLinecap="butt" strokeColor={'red'}*/}
-                    {/*                                          percent={-1 * post?.rating.result}/>}*/}
-                    {/*</>}*/}
-                    {/*<Progress strokeLinecap="butt" percent={post?.rating.result}/>*/}
                     <div style={{display: 'flex', justifyContent: 'center'}}>
                         <DislikeOutlined
                             style={{fontSize: '16px', cursor: 'pointer'}}
@@ -153,9 +151,11 @@ const PostViewComponent = ({post, flagSettings, flagView}: PostProps) => {
                         {/*компонент тегов*/}
                         <TagsViewComponent post={post}/>
                         {/*иконка комментариев*/}
-                        <CommentOutlined
-                            style={{fontSize: '22px', cursor: 'pointer', color: '#1677ff'}} // костыль на отступ
-                        />
+                        <NavLink to={'/post/' + post?.id}>
+                            <CommentOutlined
+                                style={{fontSize: '22px', cursor: 'pointer', color: '#1677ff'}} // костыль на отступ
+                            />
+                        </NavLink>
                     </Flex>
 
                 </Card>

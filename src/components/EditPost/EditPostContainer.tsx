@@ -23,7 +23,7 @@ const EditPostContainer: React.FC = () => {
     const fileList: UploadFile[] = [
         {
             uid: '-1',
-            name: post.img || '',
+            name: post?.img || '',
             status: 'done',
             url: 'http://127.0.0.1:5000/api/image/' + post?.img,
             // thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
